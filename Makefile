@@ -6,7 +6,7 @@
 #    By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/15 19:18:54 by klekisha          #+#    #+#              #
-#    Updated: 2019/05/21 21:39:57 by klekisha         ###   ########.fr        #
+#    Updated: 2019/05/22 19:41:43 by klekisha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,8 @@ SOURCES_LIBFT =	\
   		ft_strncpy.c \
   		ft_abs.c \
 		ft_count_words.c \
-		ft_recursive_power.c
+		ft_recursive_power.c \
+		ft_sqrt.c
 
 OBJECTS = $(SOURCES:%.c=%.o)
 

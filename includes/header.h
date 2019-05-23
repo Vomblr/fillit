@@ -6,7 +6,7 @@
 /*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:23:19 by mcomet            #+#    #+#             */
-/*   Updated: 2019/05/23 17:11:44 by mcomet           ###   ########.fr       */
+/*   Updated: 2019/05/23 20:13:35 by mcomet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ typedef struct		s_tetri
 
 void	usage(void);
 void	error(void);
-int		check_count_pcs(int fd);
+int		check_count_pcs_newstr(int fd, char *line);
 void	fillit(char *argv);
-char	*save_str(int fd);
 
 #endif

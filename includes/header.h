@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:23:19 by mcomet            #+#    #+#             */
-/*   Updated: 2019/05/22 20:31:26 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/05/23 17:11:44 by mcomet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ typedef struct		s_tetri
 
 void	usage(void);
 void	error(void);
-int		check_count_pcs(char *argv);
+int		check_count_pcs(int fd);
 void	fillit(char *argv);
+char	*save_str(int fd);
 
 #endif

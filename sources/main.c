@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/05/22 20:35:51 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/05/23 17:09:43 by mcomet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,14 @@ int		main(int argc, char **argv)
 
 void	fillit(char *argv)
 {
-	int	num_tetraminos;
-	int	size_square;
+	int		num_tetraminos;
+	int		size_square;
+	int 	fd;
+	char	*stock;
 
-	num_tetraminos = check_count_pcs(argv);
+	fd = open(argv[1], O_RDONLY);
+	num_tetraminos = check_count_pcs(fd);
+	stock = save_str(fd);
 	size_square = 0;
 	while (size_square * size_square < num_tetraminos * 4)
 		size_square++;

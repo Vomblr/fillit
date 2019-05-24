@@ -22,8 +22,6 @@ int		check_count_pcs_newstr(int fd, char *str)
 	i = 1;
 	if ((fd < 0))
 		usage();
-	if (!(str = (char *)malloc(sizeof(char) * 650)))
-		return (0);
 	j = 0;
 	while ((ret = read(fd, buff, 1)))
 	{

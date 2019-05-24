@@ -12,6 +12,7 @@
 
 #include "../includes/header.h"
 #include "../libft/libft.h"
+#include <stdio.h>
 
 int		main(int argc, char **argv)
 {
@@ -21,16 +22,19 @@ int		main(int argc, char **argv)
 	return (0);
 }
 
-void	fillit(char *argv)
+int		fillit(char *argv)
 {
 	int		num_tetraminos;
 	int		size_square;
 	int		fd;
-	char	*stock;
+	char *stock;
 
 	fd = open(argv, O_RDONLY);
+	if (!(stock = (char *)malloc(sizeof(char) * 650)))
+		return (0);
 	num_tetraminos = check_count_pcs_newstr(fd, stock);
 	size_square = 0;
 	while (size_square * size_square < num_tetraminos * 4)
 		size_square++;
+	//printf("%s", stock);
 }

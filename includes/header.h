@@ -28,6 +28,6 @@ typedef struct		s_tetri
 void	usage(void);
 void	error(void);
 int		check_count_pcs_newstr(int fd, char *line);
-void	fillit(char *argv);
+int		fillit(char *argv);
 
 #endif

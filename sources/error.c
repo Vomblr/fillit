@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/header.h"
+#include "../includes/header.h"
 
 void	usage(void)
 {

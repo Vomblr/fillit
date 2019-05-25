@@ -29,5 +29,8 @@ void	usage(void);
 void	error(void);
 int		check_count_pcs_newstr(int fd, char *line);
 int		fillit(char *argv);
+int		check_pcs_links(char *stock, int j);
+int		valid_pcs(char *stock, int j);
+int		check_str(char *stock);
 
 #endif

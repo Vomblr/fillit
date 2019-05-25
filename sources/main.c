@@ -6,7 +6,7 @@
 /*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/05/23 20:15:09 by mcomet           ###   ########.fr       */
+/*   Updated: 2019/05/25 16:30:21 by Dmitry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,9 @@ int		fillit(char *argv)
 	size_square = 0;
 	while (size_square * size_square < num_tetraminos * 4)
 		size_square++;
-	//printf("%s", stock);
+	if (!check_str(stock))
+		error();
+	else
+		printf("VALID FILE");
+	return 0;
 }

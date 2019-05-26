@@ -6,7 +6,7 @@
 #    By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/15 19:18:54 by klekisha          #+#    #+#              #
-#    Updated: 2019/05/22 19:41:43 by klekisha         ###   ########.fr        #
+#    Updated: 2019/05/25 19:04:40 by klekisha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,21 @@ CC = gcc
 
 NAME = fillit
 
-CFLAGS = -Wall -Wextra -Werror -I. -o $(NAME)
+AUTHORS = klekisha\nmcomet
 
-PATH_FILLIT = fillit/
+FILLIT_DIR = fillit
 
-PATH_LIBFT = libft/
+LIBFT_DIR = libft
 
-SOURCES_LIBFT =	\
+INCL_DIR = includes
+
+WFLAGS = -Wall -Wextra -Werror -I $(INCL_DIR)
+
+DFLAGS = -g
+
+OFLAGS = -O3
+
+LIBFT_SOURCES =	\
 		ft_atoi.c \
   		ft_bzero.c \
   		ft_isalnum.c \
@@ -86,17 +94,21 @@ SOURCES_LIBFT =	\
 		ft_recursive_power.c \
 		ft_sqrt.c
 
-OBJECTS = $(SOURCES:%.c=%.o)
+LIBFT_OBJECTS = $(LIBFT_SOURCES:.c=.o)
 
+# gcc main.c get_next_line.c libft/*.c -o GNL
 all: $(NAME)
 
 $(NAME):
-		$(CC) $(CFLAGS) $(PATH_LIBFT) $(SOURCES_LIBFT)
+		$(CC) $(WFLAGS) -o $(NAME)
+
+%.o: %.c
+	gcc $(CFLAGS) -c -o $@ $<
 
 clean:
-	rm -rf $(OBJECTS)
+	/bin/rm -f $(OBJECTS)
 
 fclean: clean
-	rm -rf $(NAME)
+	/bin/rm -f $(NAME)
 
 re: fclean all

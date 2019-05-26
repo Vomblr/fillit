@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/05/27 00:39:00 by Dmitry           ###   ########.fr       */
+/*   Updated: 2019/05/27 00:53:11 by Dmitry           ###   ########.fr       */
+/*   Updated: 2019/05/26 20:20:28 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
-#include "../libft/libft.h"
-#include <stdio.h>
 
 int		main(int argc, char **argv)
 {
@@ -43,12 +42,14 @@ int		fillit(char *argv)
 	int		fd;
 	char	*stock;
 	t_tetri	*tetri;
+	//char 	*stock;
+	//t_tetri	tetrimino;
 
-	fd = open(argv, O_RDONLY);
+	fd = open(argv, O_RDONLY); //error check is located in "check_count_pcs_newstr"
 	if (!(stock = (char *)malloc(sizeof(char) * 650)))
 		return (0);
 	num_tetraminos = check_count_pcs_newstr(fd, stock);
-	size_square = 0;
+	size_square = 2;
 	while (size_square * size_square < num_tetraminos * 4)
 		size_square++;
 	if (!check_str(stock))
@@ -61,5 +62,16 @@ int		fillit(char *argv)
 
 
 	return 0;
+/*=======
+	else
+		ft_putstr("VALID FILE");
+	// example of one tetrimino:
+	// {0,1,2,3} = ####
+	// first of all, we need to check 2x2 and 3x3 maps 
+	
+	ft_check_map_for_1_tetr(tetrimino, num_tetraminos);
+	ft_check_map_for_2_tetr(tetrimino, num_tetraminos);
+	return (0);
+>>>>>>> 8f005a08d533bd3b5e5077d0910c908753d3b858*/
 }
 

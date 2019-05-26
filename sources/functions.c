@@ -3,10 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   functions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 20:33:39 by klekisha          #+#    #+#             */
-/*   Updated: 2019/05/26 23:49:55 by Dmitry           ###   ########.fr       */
+/*   Updated: 2019/05/27 00:53:38 by Dmitry           ###   ########.fr       */
+/*   Updated: 2019/05/26 20:27:58 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,3 +170,24 @@ t_tetri		*stock_tetri(char *str, int num_tetraminos)
 	tmp->next = NULL;
 	return (stock);
 }
+/*
+int		ft_check_map_for_1_tetr(t_tetri tetrimino, int num_tetraminos)
+{
+	if (tetrimino.x[3] == 4 || tetrimino.x[3] == 12)
+		return (4);
+	if (tetrimino.x[0] == 0 && tetrimino.x[1] == 1 && tetrimino.x[2] == 4 && tetrimino.x[3] == 5)
+		return (2);
+	return (3);
+}
+
+int		ft_check_map_for_2_tetr(t_tetri tetrimino, int num_tetraminos)
+{
+	//if ()
+	if (tetrimino.x[3] == 4 || tetrimino.x[3] == 12)
+		return (4);
+	if (tetrimino.x[0] == 0 && tetrimino.x[1] == 1 && tetrimino.x[2] == 4 && tetrimino.x[3] == 5)
+		return (2);
+	// if (tetrimino.x[3] >= 5 && tetrimino.x[3] < 12)
+	// 	return (3);
+	return (3);
+} */

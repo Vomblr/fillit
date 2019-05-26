@@ -6,7 +6,7 @@
 #    By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/15 19:18:54 by klekisha          #+#    #+#              #
-#    Updated: 2019/05/25 19:04:40 by klekisha         ###   ########.fr        #
+#    Updated: 2019/05/26 17:26:31 by klekisha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,6 @@ LIBFT_DIR = libft
 INCL_DIR = includes
 
 WFLAGS = -Wall -Wextra -Werror -I $(INCL_DIR)
-
-DFLAGS = -g
-
-OFLAGS = -O3
 
 LIBFT_SOURCES =	\
 		ft_atoi.c \
@@ -96,11 +92,18 @@ LIBFT_SOURCES =	\
 
 LIBFT_OBJECTS = $(LIBFT_SOURCES:.c=.o)
 
+FILLIT_SOURCES = \
+	main.c \
+	functions.c \
+	errors.c
+
+FILLIT_OBJECTS = $(FILLIT_SOURCES:.c=.o)
+
 # gcc main.c get_next_line.c libft/*.c -o GNL
 all: $(NAME)
 
 $(NAME):
-		$(CC) $(WFLAGS) -o $(NAME)
+		$(CC) $(WFLAGS) $(LIBFT_DIR)/$(LIBFT_SOURCES) $(FILLIT_DIR)/$(FILLIT_SOURCES) $()  -o $(NAME)
 
 %.o: %.c
 	gcc $(CFLAGS) -c -o $@ $<

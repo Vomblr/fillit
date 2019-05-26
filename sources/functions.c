@@ -6,10 +6,11 @@
 /*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 20:33:39 by klekisha          #+#    #+#             */
-/*   Updated: 2019/05/25 17:29:07 by Dmitry           ###   ########.fr       */
+/*   Updated: 2019/05/26 23:49:55 by Dmitry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../libft/libft.h"
 #include "../includes/header.h"
 
 int		check_count_pcs_newstr(int fd, char *str)
@@ -66,7 +67,7 @@ int check_pcs_links(char *stock, int j)
 	return (0);
 }
 
-int valid_pcs(char *stock, int j)
+int		valid_pcs(char *stock, int j)
 {
 	int dash;
 	int dot;
@@ -92,7 +93,7 @@ int valid_pcs(char *stock, int j)
 	return (0);
 }
 
-int 	check_str(char *stock)
+int		check_str(char *stock)
 {
 	int	i;
 	int j;
@@ -114,4 +115,57 @@ int 	check_str(char *stock)
 		i = 0;
 	}
 	return (1);
+}
+
+void		set_tetri(t_tetri **tmp, char *str)
+{
+	int	i;
+	int	j;
+	int z;
+
+	i = 0;
+	j = 0;
+	z = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '#')
+		{
+			// "....\n..##\n.##.\n....\n"
+			if (str[i + 4] == '#' && str[i + 5] == '#')
+				z = 1;
+			(*tmp)->x[j] = z;
+			j++;
+			z++;
+		}
+		if (z && str[i] != '#' && str[i] != '\n')
+			z++;
+		i++;
+	}
+}
+
+t_tetri		*stock_tetri(char *str, int num_tetraminos)
+{
+	int		plus21;
+	char 	c;
+	t_tetri	*tmp;
+	t_tetri	*stock;
+
+	plus21 = 0;
+	c = 'A';
+	if (!(stock = (t_tetri*)malloc(sizeof(t_tetri))))
+		return (NULL);
+	tmp = stock;
+	while (num_tetraminos > 0)
+	{
+		tmp->c = c;
+		set_tetri(&tmp, ft_strsub(str, 0 + plus21, 20));
+		if (!(tmp->next = (t_tetri*)malloc(sizeof(t_tetri))))
+			return (NULL);
+		tmp = tmp->next;
+		num_tetraminos--;
+		c++;
+		plus21 += 21;
+	}
+	tmp->next = NULL;
+	return (stock);
 }

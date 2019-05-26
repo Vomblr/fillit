@@ -6,7 +6,7 @@
 /*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/05/25 16:30:21 by Dmitry           ###   ########.fr       */
+/*   Updated: 2019/05/27 00:39:00 by Dmitry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,27 @@ int		main(int argc, char **argv)
 	return (0);
 }
 
+void printFromHead(const t_tetri* list) { //TEST FUNCTION!!!
+	if (list) {
+		int i = 0;
+		printf("TETRIMIN[%c]: ", list->c);
+		while (i != 4)
+		{
+			printf("%d ", list->x[i]);
+			i++;
+		}
+		putchar('\n');
+		printFromHead(list->next);
+	}
+}
+
 int		fillit(char *argv)
 {
 	int		num_tetraminos;
 	int		size_square;
 	int		fd;
-	char *stock;
+	char	*stock;
+	t_tetri	*tetri;
 
 	fd = open(argv, O_RDONLY);
 	if (!(stock = (char *)malloc(sizeof(char) * 650)))
@@ -38,7 +53,13 @@ int		fillit(char *argv)
 		size_square++;
 	if (!check_str(stock))
 		error();
-	else
-		printf("VALID FILE");
+	close(fd);
+	tetri = stock_tetri(stock, num_tetraminos);
+
+	//-------------------------------------------
+	printFromHead(tetri);
+
+
 	return 0;
 }
+

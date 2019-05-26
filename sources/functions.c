@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 20:33:39 by klekisha          #+#    #+#             */
-/*   Updated: 2019/05/26 19:41:25 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/05/26 20:14:55 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,30 @@ int 	check_str(char *stock)
 }
 
 
-int		check_small_maps(t_tetri tetrimino, int num_tetraminos)
+int		ft_check_map_for_1_tetr(t_tetri tetrimino, int num_tetraminos)
 {
-	
+	if (num_tetraminos == 1)
+	{
+		if (tetrimino.x[3] == 4 || tetrimino.x[3] == 12)
+			return (4);
+		if (tetrimino.x[0] == 0 && tetrimino.x[1] == 1 && tetrimino.x[2] == 4 && tetrimino.x[3] == 5)
+			return (2);
+		// if (tetrimino.x[3] >= 5 && tetrimino.x[3] < 12)
+		// 	return (3);
+		return (3);
+	}
+}
+
+int		ft_check_map_for_2_tetr(t_tetri tetrimino, int num_tetraminos)
+{
+	if (num_tetraminos == 2)
+	{
+		if (tetrimino.x[3] == 4 || tetrimino.x[3] == 12)
+			return (4);
+		if (tetrimino.x[0] == 0 && tetrimino.x[1] == 1 && tetrimino.x[2] == 4 && tetrimino.x[3] == 5)
+			return (2);
+		// if (tetrimino.x[3] >= 5 && tetrimino.x[3] < 12)
+		// 	return (3);
+		return (3);
+	}
 }

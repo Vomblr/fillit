@@ -6,23 +6,23 @@
 #    By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/15 19:18:54 by klekisha          #+#    #+#              #
-#    Updated: 2019/05/26 17:26:31 by klekisha         ###   ########.fr        #
+#    Updated: 2019/05/26 18:37:42 by klekisha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-NAME = fillit
+PROJ_NAME = fillit
 
 AUTHORS = klekisha\nmcomet
 
-FILLIT_DIR = fillit
+PROJ_DIR = sources
 
 LIBFT_DIR = libft
 
 INCL_DIR = includes
 
-WFLAGS = -Wall -Wextra -Werror -I $(INCL_DIR)
+CFLAGS = -Wall -Wextra -Werror -I $(INCL_DIR)
 
 LIBFT_SOURCES =	\
 		ft_atoi.c \
@@ -90,20 +90,23 @@ LIBFT_SOURCES =	\
 		ft_recursive_power.c \
 		ft_sqrt.c
 
-LIBFT_OBJECTS = $(LIBFT_SOURCES:.c=.o)
+LIBFT_OBJECTS = $(LIBFT_SOURCES:%.c=%.o)
 
-FILLIT_SOURCES = \
-	main.c \
-	functions.c \
-	errors.c
+LIBFT_DIR_AND_SOURCES = $(LIBFT_SOURCES:%.c= $(LIBFT_DIR)/%.c)
 
-FILLIT_OBJECTS = $(FILLIT_SOURCES:.c=.o)
+PROJ_DIR_AND_SOURCES = $(PROJ_SOURCES:%.c= $(PROJ_DIR)/%.c)
 
-# gcc main.c get_next_line.c libft/*.c -o GNL
-all: $(NAME)
+PROJ_SOURCES = \
+		main.c \
+		functions.c \
+		error.c
 
-$(NAME):
-		$(CC) $(WFLAGS) $(LIBFT_DIR)/$(LIBFT_SOURCES) $(FILLIT_DIR)/$(FILLIT_SOURCES) $()  -o $(NAME)
+PROJ_OBJECTS = $(PROJ_SOURCES:%.c=%.o)
+
+all: $(PROJ_NAME)
+
+$(PROJ_NAME):
+		$(CC) $(CFLAGS) $(LIBFT_DIR_AND_SOURCES) $(PROJ_DIR_AND_SOURCES) -o $(PROJ_NAME)
 
 %.o: %.c
 	gcc $(CFLAGS) -c -o $@ $<
@@ -112,6 +115,6 @@ clean:
 	/bin/rm -f $(OBJECTS)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	/bin/rm -f $(PROJ_NAME)
 
 re: fclean all

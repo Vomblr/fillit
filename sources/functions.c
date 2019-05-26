@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 20:33:39 by klekisha          #+#    #+#             */
-/*   Updated: 2019/05/25 17:29:07 by Dmitry           ###   ########.fr       */
+/*   Updated: 2019/05/26 19:41:25 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,10 @@ int 	check_str(char *stock)
 		i = 0;
 	}
 	return (1);
+}
+
+
+int		check_small_maps(t_tetri tetrimino, int num_tetraminos)
+{
+	
 }

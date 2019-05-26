@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/05/25 16:30:21 by Dmitry           ###   ########.fr       */
+/*   Updated: 2019/05/26 19:43:28 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,26 @@ int		fillit(char *argv)
 	int		num_tetraminos;
 	int		size_square;
 	int		fd;
-	char *stock;
+	char 	*stock;
+	t_tetri	tetrimino;
 
-	fd = open(argv, O_RDONLY);
+	if ((fd = open(argv, O_RDONLY)) == -1)
+// 		DIMA, fix here case of error opening, please!!
+		ft_putstr("ERROR");
 	if (!(stock = (char *)malloc(sizeof(char) * 650)))
 		return (0);
 	num_tetraminos = check_count_pcs_newstr(fd, stock);
-	size_square = 0;
+	size_square = 2;
 	while (size_square * size_square < num_tetraminos * 4)
 		size_square++;
 	if (!check_str(stock))
 		error();
+	// example of one tetrimino:
+	// {0,1,2,3} = ####
+	// first of all, we need to check 2x2 and 3x3 maps 
+	
+	ft_check_small_maps(tetrimino, num_tetraminos);
 	else
-		printf("VALID FILE");
+		ft_putstr("VALID FILE");
 	return 0;
 }

@@ -6,11 +6,10 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 20:33:39 by klekisha          #+#    #+#             */
-/*   Updated: 2019/05/27 19:14:05 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/05/27 21:30:33 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "../includes/header.h"
 
 int		check_count_pcs_newstr(int fd, char *str)
@@ -173,24 +172,48 @@ t_tetri		*stock_tetri(char *str, int num_tetraminos)
 	tmp->next = NULL;
 	return (stock);
 }
-/*
-int		ft_check_map_for_1_tetr(t_tetri tetrimino, int num_tetraminos)
-{
-	if (tetrimino.x[3] == 4 || tetrimino.x[3] == 12)
-		return (4);
-	if (tetrimino.x[0] == 0 && tetrimino.x[1] == 1 && tetrimino.x[2] == 4 && tetrimino.x[3] == 5)
-		return (2);
-	return (3);
-}
 
-int		ft_check_map_for_2_tetr(t_tetri tetrimino, int num_tetraminos)
+// /* 2 functions below check a case then map size 2 or 3 enough for tetraminos set */
+
+// int		ft_check_map_for_1_tetr(t_tetri tetrimino)
+// {
+// 	if (tetrimino.x[3] == 4 || tetrimino.x[3] == 12)
+// 		return (4);
+// 	if (tetrimino.x[0] == 0 && tetrimino.x[1] == 1 && tetrimino.x[2] == 4 && tetrimino.x[3] == 5)
+// 		return (2);
+// 	return (3);
+// }
+
+// int		ft_check_map_for_2_tetr(t_tetri tetrimino)
+// {
+// 	t_tetri		first_tetrimino;
+// 	t_tetri		second_tetrimino;
+
+// 	first_tetrimino = tetrimino;
+// 	second_tetrimino = *(tetrimino.next);
+// 	if ((ft_check_map_for_1_tetr(first_tetrimino)) == 4 || (ft_check_map_for_1_tetr(second_tetrimino)) == 4)
+// 		return (4);
+	
+// }
+
+int		ft_decode_tetri(t_tetri tetrimino, int map_size_prev, int map_size_current)
 {
-	//if ()
-	if (tetrimino.x[3] == 4 || tetrimino.x[3] == 12)
-		return (4);
-	if (tetrimino.x[0] == 0 && tetrimino.x[1] == 1 && tetrimino.x[2] == 4 && tetrimino.x[3] == 5)
-		return (2);
-	// if (tetrimino.x[3] >= 5 && tetrimino.x[3] < 12)
-	// 	return (3);
-	return (3);
-} */
+	int		indx;
+	int		tmp;
+
+	if (map_size_prev = map_size_current)
+		return (1);
+	while (&tetrimino)
+	{
+		indx = -1;
+		while (indx++ < 5)
+		{
+			tmp = tetrimino.x[indx];
+			if (tmp % map_size_prev / map_size_current > 0)
+				return (0);
+			tetrimino.x[indx] = tmp / map_size_prev * map_size_current + tmp % map_size_prev;
+		}
+		tetrimino = *(tetrimino.next);
+	}
+	return (1);
+}

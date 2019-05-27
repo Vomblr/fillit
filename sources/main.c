@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/05/27 19:14:04 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/05/27 21:39:06 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,31 @@ void printFromHead(const t_tetri* list) { //TEST FUNCTION!!!
 int		fillit(char *argv)
 {
 	int num_tetraminos;
-	int size_square;
+	int map_size;
+	int	map_size_previous;
 	int fd;
 	char *stock;
 	t_tetri *tetri;
 	//char 	*stock;
 	//t_tetri	tetrimino;
 
+	map_size = 2;	
+	map_size_previous = 4;
 	fd = open(argv, O_RDONLY); //error check is located in "check_count_pcs_newstr"
 	if (!(stock = (char *) malloc(sizeof(char) * 650)))
 		return (0);
 	num_tetraminos = check_count_pcs_newstr(fd, stock);
-	size_square = 2;
-	while (size_square * size_square < num_tetraminos * 4)
-		size_square++;
 	if (!check_str(stock))
 		error();
 	close(fd);
 	tetri = stock_tetri(stock, num_tetraminos);
-
+	while (map_size * map_size < num_tetraminos * 4)
+		map_size++;
+	while (ft_decode_tetri(*tetri, map_size_previous, map_size) == 0)
+	{
+		map_size_previous = map_size;
+		map_size++;
+	}
 	//-------------------------------------------
 	printFromHead(tetri);
 

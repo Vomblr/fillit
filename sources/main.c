@@ -47,8 +47,7 @@ void		fillit(char *argv)
 	fd = open(argv, O_RDONLY); //error check is located in "check_count_pcs_newstr"
 	if (!(stock = (char *) malloc(sizeof(char) * 650)))
 		error();
-	if (!(num_tetraminos = check_count_pcs_newstr(fd, stock)))
-		error();
+	num_tetraminos = check_count_pcs_newstr(fd, stock);
 	size_square = 2;
 	while (size_square * size_square < num_tetraminos * 4)
 		size_square++;

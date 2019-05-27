@@ -37,6 +37,8 @@ int		check_count_pcs_newstr(int fd, char *str)
 	str[j] = '\0';
 	if ((i % 5) == 0 && (i = (i / 5)) <= 26)
 		return (i);
+	else
+		error();
 	return (0);
 }
 

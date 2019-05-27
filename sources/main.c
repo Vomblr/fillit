@@ -22,12 +22,12 @@ int		main(int argc, char **argv)
 }
 
 void printFromHead(const t_tetri* list) { //TEST FUNCTION!!!
-	if (list) {
+	if (list->next) {
 		int i = 0;
-		printf("TETRIMIN[%c]: ", list->c);
+		printf("TETRIMIN[%c]:\t", list->c);
 		while (i != 4)
 		{
-			printf("%d ", list->x[i]);
+			printf("%d  ", list->x[i]);
 			i++;
 		}
 		putchar('\n');
@@ -37,16 +37,16 @@ void printFromHead(const t_tetri* list) { //TEST FUNCTION!!!
 
 int		fillit(char *argv)
 {
-	int		num_tetraminos;
-	int		size_square;
-	int		fd;
-	char	*stock;
-	t_tetri	*tetri;
+	int num_tetraminos;
+	int size_square;
+	int fd;
+	char *stock;
+	t_tetri *tetri;
 	//char 	*stock;
 	//t_tetri	tetrimino;
 
 	fd = open(argv, O_RDONLY); //error check is located in "check_count_pcs_newstr"
-	if (!(stock = (char *)malloc(sizeof(char) * 650)))
+	if (!(stock = (char *) malloc(sizeof(char) * 650)))
 		return (0);
 	num_tetraminos = check_count_pcs_newstr(fd, stock);
 	size_square = 2;
@@ -62,6 +62,7 @@ int		fillit(char *argv)
 
 
 	return 0;
+}
 /*=======
 	else
 		ft_putstr("VALID FILE");
@@ -72,6 +73,6 @@ int		fillit(char *argv)
 	ft_check_map_for_1_tetr(tetrimino, num_tetraminos);
 	ft_check_map_for_2_tetr(tetrimino, num_tetraminos);
 	return (0);
->>>>>>> 8f005a08d533bd3b5e5077d0910c908753d3b858*/
-}
 
+}
+*/

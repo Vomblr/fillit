@@ -34,7 +34,7 @@ void printFromHead(const t_tetri* list) { //TEST FUNCTION!!!
 	}
 }
 
-int		fillit(char *argv)
+void		fillit(char *argv)
 {
 	int num_tetraminos;
 	int map_size;
@@ -49,7 +49,7 @@ int		fillit(char *argv)
 	map_size_previous = 4;
 	fd = open(argv, O_RDONLY); //error check is located in "check_count_pcs_newstr"
 	if (!(stock = (char *) malloc(sizeof(char) * 650)))
-		return (0);
+		error();
 	num_tetraminos = check_count_pcs_newstr(fd, stock);
 	if (!check_str(stock))
 		error();
@@ -65,8 +65,6 @@ int		fillit(char *argv)
 	//-------------------------------------------
 	printFromHead(tetri);
 
-
-	return 0;
 }
 /*=======
 	else

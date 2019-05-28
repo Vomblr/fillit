@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 20:33:39 by klekisha          #+#    #+#             */
-/*   Updated: 2019/05/27 21:30:33 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/05/28 21:28:41 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,24 +198,26 @@ t_tetri		*stock_tetri(char *str, int num_tetraminos)
 	
 // }
 
-int		ft_decode_tetri(t_tetri tetrimino, int map_size_prev, int map_size_current)
+int		ft_decode_tetri(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
 {
 	int		indx;
 	int		tmp;
 
-	if (map_size_prev = map_size_current)
+	if (mp_sz_prvs = mp_sz_crrnt)
 		return (1);
-	while (&tetrimino)
+	if (mp_sz_crrnt > mp_sz_prvs)
+		if (tetrimino->x[3] % mp_sz_prvs / mp_sz_crrnt > 0 || 
+			tetrimino->x[2] % mp_sz_prvs / mp_sz_crrnt > 0)
+			return (0);
+	while (tetrimino)
 	{
 		indx = -1;
-		while (indx++ < 5)
+		while (++indx < 4)
 		{
-			tmp = tetrimino.x[indx];
-			if (tmp % map_size_prev / map_size_current > 0)
-				return (0);
-			tetrimino.x[indx] = tmp / map_size_prev * map_size_current + tmp % map_size_prev;
+			tmp = tetrimino->x[indx];
+			tetrimino->x[indx] = tmp / mp_sz_prvs * mp_sz_crrnt + tmp % mp_sz_prvs;
 		}
-		tetrimino = *(tetrimino.next);
+		tetrimino = tetrimino->next;
 	}
 	return (1);
 }

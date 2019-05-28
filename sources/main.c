@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/05/27 21:39:06 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/05/28 21:28:27 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void		fillit(char *argv)
 	int fd;
 	char *stock;
 	t_tetri *tetri;
+	char	*map;
 	//char 	*stock;
 	//t_tetri	tetrimino;
 
@@ -59,12 +60,21 @@ void		fillit(char *argv)
 		map_size++;
 	while (ft_decode_tetri(*tetri, map_size_previous, map_size) == 0)
 	{
-		map_size_previous = map_size;
+		map_size_previous = map_size++;
 		map_size++;
 	}
-	//-------------------------------------------
-	printFromHead(tetri);
-
+	// //-------------------------------------------
+	// printFromHead(tetri);
+	if (!(map = ft_strnew((size_t)(map_size * map_size))))
+		return ;
+	while ((ft_recursion(&tetri, map_size, map)) == 0)
+	{
+		map_size++
+		free(map);
+		if (!(map = ft_strnew((size_t)(map_size * map_size))))
+			return ;
+	}
+	return ;
 }
 /*=======
 	else
@@ -79,3 +89,11 @@ void		fillit(char *argv)
 
 }
 */
+
+int		ft_recursion(t_tetri *tetri, int map_size, char *map)
+{
+	int		a;
+
+	a = ft_recursion(tetri->next, map_size, map);
+	return ()
+}

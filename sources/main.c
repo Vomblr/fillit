@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/01 11:22:51 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/01 17:58:30 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ void printFromHead(const t_tetri* list) { //TEST FUNCTION!!!
 void		fillit(char *argv)
 {
 	int num_tetraminos;
-	int map_size;
+	int mp_sz;
 	int	map_size_previous;
 	int fd;
 	char *stock;
-	t_tetri *tetri;
-	char	*map;
-	int		start_point;
+	t_tetri *ttr;
+	char	*mp;
+	int		strt_pnt;
 	int		a;
 
 	//char 	*stock;
 	//t_tetri	tetrimino;
 
-	map_size = 2;	
+	mp_sz = 2;	
 	map_size_previous = 4;
 	a = 0;
 	fd = open(argv, O_RDONLY); //error check is located in "check_count_pcs_newstr"
@@ -66,53 +66,83 @@ void		fillit(char *argv)
 	if (!check_str(stock))
 		error();
 	close(fd);
-	tetri = stock_tetri(stock, num_tetraminos);
-	while (map_size * map_size < num_tetraminos * 4)
-		map_size++;
-	while (ft_decode_tetri(tetri, map_size_previous, map_size) == 0)
+	ttr = stock_tetri(stock, num_tetraminos);
+	while (mp_sz * mp_sz < num_tetraminos * 4)
+		mp_sz++;
+	while (ft_decode_tetri(ttr, map_size_previous, mp_sz) == 0)
 	{
-		map_size_previous = map_size++;
-		map_size++;
+		map_size_previous = mp_sz++;
+		mp_sz++;
 	}
 	// //-------------------------------------------
-	// printFromHead(tetri);
-	if (!(map = ft_strnew((size_t)(map_size * map_size))))
+	// printFromHead(ttr);
+	if (!(mp = ft_strnew((size_t)(mp_sz * mp_sz))))
 		return ;
-	ft_memset(map,(int)('.'),(map_size * map_size));	
-	ft_recursion(tetri, map_size, map, 0);
-	// start_point = -1;
-	// while (a == 0)
-	// {
-	// 	a = ft_recursion(tetri, map_size, map, ++start_point);
-	// 	if (a == 0)
-	// 		a = ft_recursion(tetri->next, map_size, map, start_point);
-	// 	map_size++;
-	// 	ft_decode_tetri(tetri, map_size_previous, map_size);
-	// 	free(map);
-	// 	if (!(map = ft_strnew((size_t)(map_size * map_size))))
-	// 		return ;
-	// 	ft_memset(map, (int)('.'), (map_size * map_size));
-	// }
-	printf("%s", map);
+	ft_memset(mp,(int)('.'),(mp_sz * mp_sz));	
+	ft_recursion(ttr, mp_sz, mp);
+	printf("%s", mp);
 	return ;
 }
 	// else
 	// 	ft_putstr("VALID FILE");
 
-int		ft_recursion(t_tetri *tetri, int map_size, char *map, int start_point)
+int		ft_recursion(t_tetri *ttr, int mp_sz, char *mp)
 {
 	int		a;
 	int		indx;
+	int		strt_pnt;
 
 	indx = -1;
-	while (++indx < 4)
+	if ((strt_pnt = ft_try_tetri(ttr, mp_sz, mp)) == -1)
 	{
-		if (start_point + tetri->x[indx] > map_size * map_size)
-			return (0);
-		if (map[start_point + tetri->x[indx]] != '.')
-			return (0);
-		map[start_point + tetri->x[indx]] = tetri->c;
+		if (ttr->c == 'A')
+		{
+			mp_sz++;
+			ft_decode_tetri(ttr, mp_sz - 1, mp_sz);
+			free(mp);
+			if (!(mp = ft_strnew((size_t)(mp_sz * mp_sz))))
+				return (-1);
+			ft_memset(mp, (int)('.'), (mp_sz * mp_sz));		
+		}
+		else
+		{
+			return (-1);
+		}
+	}	
+	
+	while (strt_pnt < mp_sz * mp_sz - 4)
+	{
+		while (++indx < 4)
+			mp[strt_pnt + ttr->x[indx]] = ttr->c;
+		if (ttr->c)
+			a = ft_recursion(ttr->next, mp_sz, mp);
+		else
+			a = 1;			
+		strt_pnt++;
 	}
-	a = ft_recursion(tetri->next, map_size, map, ++start_point) || ft_recursion(tetri->next, map_size, map, start_point);
 	return (a);
+}
+
+int		ft_try_tetri(t_tetri *ttr, int mp_sz, char *mp)
+{
+	int		indx;
+	int		strt_pnt;
+	int		flg_sccss;
+
+	strt_pnt = -1;
+	while (++strt_pnt < mp_sz * mp_sz - 4)
+	{
+		flg_sccss = 1;
+		indx = -1;
+		while (++indx < 4)
+		{
+			if (strt_pnt + ttr->x[indx] > mp_sz * mp_sz)
+				return (-1);
+			if ((mp[strt_pnt + ttr->x[indx]] != '.') || (indx > 0 && (ttr->x[indx] - ttr->x[indx - 1] == 1) && (strt_pnt + ttr->x[indx] % mp_sz == 0)))
+				flg_sccss = 0;
+		}
+		if (flg_sccss == 1)
+			return (strt_pnt);		
+	}
+	return (-1);
 }

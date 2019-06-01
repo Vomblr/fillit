@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:23:19 by mcomet            #+#    #+#             */
-/*   Updated: 2019/05/28 21:28:31 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/05/31 20:53:56 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ t_tetri	*stock_tetri(char *str, int num_tetraminos);
 // int		ft_check_map_for_1_tetr(t_tetri tetrimino);
 // int		ft_check_map_for_2_tetr(t_tetri tetrimino);
 int		ft_decode_tetri(t_tetri *tetrimino, int map_size_prev, int map_size_current);
-int		ft_recursion(t_tetri *tetri, int map_size);
+int		ft_recursion(t_tetri *tetri, int map_size, char *map, int start_point);
 
 #endif

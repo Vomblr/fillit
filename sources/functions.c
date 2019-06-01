@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 20:33:39 by klekisha          #+#    #+#             */
-/*   Updated: 2019/05/28 21:28:41 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/05/31 19:40:54 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,13 +203,13 @@ int		ft_decode_tetri(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
 	int		indx;
 	int		tmp;
 
-	if (mp_sz_prvs = mp_sz_crrnt)
+	if (mp_sz_prvs == mp_sz_crrnt)
 		return (1);
 	if (mp_sz_crrnt > mp_sz_prvs)
 		if (tetrimino->x[3] % mp_sz_prvs / mp_sz_crrnt > 0 || 
 			tetrimino->x[2] % mp_sz_prvs / mp_sz_crrnt > 0)
 			return (0);
-	while (tetrimino)
+	while (tetrimino->c)
 	{
 		indx = -1;
 		while (++indx < 4)

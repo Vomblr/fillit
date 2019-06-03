@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/01 21:16:09 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/03 19:21:44 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ int		ft_recursion(t_tetri *ttr, int mp_sz, char *mp)
 	strt_pnt = -1;
 	if (!(ttr->c))
 		return (1);		
-	while (ft_try_tetri(ttr, mp_sz, mp, ++strt_pnt) == -1);
+	while (ft_try_tetri(ttr, mp_sz, mp, strt_pnt) == -1)
+		strt_pnt++;
 	if (ft_try_tetri(ttr, mp_sz, mp, ++strt_pnt) != -1)
 	{
 		if (ttr->c == 'A')
@@ -134,22 +135,22 @@ int		ft_recursion(t_tetri *ttr, int mp_sz, char *mp)
 int		ft_try_tetri(t_tetri *ttr, int mp_sz, char *mp, int strt_pnt)
 {
 	int		indx;
-	int		strt_pnt;
+	// int		strt_pnt;
 	int		flg_sccss;
 
 	strt_pnt = -1;
 	while (++strt_pnt < mp_sz * mp_sz - 4)
 	{
-		flg_sccss = 1;
+		flg_sccss = 0;
 		indx = -1;
 		while (++indx < 4)
 		{
 			if (strt_pnt + ttr->x[indx] > mp_sz * mp_sz)
 				return (-1);
 			if ((mp[strt_pnt + ttr->x[indx]] != '.') || (indx > 0 && (ttr->x[indx] - ttr->x[indx - 1] == 1) && (strt_pnt + ttr->x[indx] % mp_sz == 0)))
-				flg_sccss = 0;
+				flg_sccss++;
 		}
-		if (flg_sccss == 1)
+		if (flg_sccss == 4)
 			return (strt_pnt);		
 	}
 	return (-1);

@@ -124,16 +124,16 @@ int		ft_recursion(t_tetri *ttr, int mp_sz, char *mp)
 		mp[strt_pnt + ttr->x[indx]] = ttr->c;
 	while ((a = ft_recursion(ttr->next, mp_sz, mp)) != 1 && (strt_pnt = ft_try_tetri(ttr, mp_sz, mp, ++strt_pnt)) != -1)
 	{
-		if (!mp_tmp)
-		{
-			if (!(mp_tmp = ft_strnew(mp_sz * mp_sz)))
-				return (-1);
-			ft_strcpy(mp_tmp, mp);
-		}
-		else
-		{
-			ft_strcpy(mp, mp_tmp);
-		}		
+// 		if (!mp_tmp)
+// 		{
+// 			if (!(mp_tmp = ft_strnew(mp_sz * mp_sz)))
+// 				return (-1);
+// 			ft_strcpy(mp_tmp, mp);
+// 		}
+// 		else
+// 		{
+		ft_strcpy(mp, mp_tmp);
+// 		}		
 		indx = -1;
 		while (++indx < 4)
 			mp[strt_pnt + ttr->x[indx]] = ttr->c;
@@ -143,7 +143,7 @@ int		ft_recursion(t_tetri *ttr, int mp_sz, char *mp)
 		// 	return (a);
 		// }
 	}
-	return (-1);
+	return ((a != 1 || strt_pnt == -1)? -1, 1);
 }
 
 int		ft_try_tetri(t_tetri *ttr, int mp_sz, char *mp, int strt_pnt)

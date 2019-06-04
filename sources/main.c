@@ -6,25 +6,25 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/04 19:11:04 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/04 20:51:30 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-// int		main(int argc, char **argv)
-// {
-// 	if (argc != 2)
-// 		usage();
-// 	fillit(argv[1]);
-// 	return (0);
-// }
-int		main(void)
+int		main(int argc, char **argv)
 {
-	char *argv = "../tests/test5_valid.txt";
-	fillit(argv);
+	if (argc != 2)
+		usage();
+	fillit(argv[1]);
 	return (0);
 }
+// int		main(void)
+// {
+// 	char *argv = "tests/test3_valid.txt";
+// 	fillit(argv);
+// 	return (0);
+// }
 void printFromHead(const t_tetri* list) { //TEST FUNCTION!!!
 	if (list->next) {
 		int i = 0;
@@ -41,15 +41,15 @@ void printFromHead(const t_tetri* list) { //TEST FUNCTION!!!
 
 void		fillit(char *argv)
 {
-	int num_tetraminos;
-	int mp_sz;
-	int	map_size_previous;
-	int fd;
-	char *stock;
-	t_tetri *ttr;
-	char	*mp;
-	int		strt_pnt;
-	int		a;
+	int			num_tetraminos;
+	int			mp_sz;
+	int			map_size_previous;
+	int			fd;
+	char		*stock;
+	t_tetri		*ttr;
+	char		*mp;
+	int			strt_pnt;
+	int			a;
 
 	//char 	*stock;
 	//t_tetri	tetrimino;
@@ -73,12 +73,17 @@ void		fillit(char *argv)
 		map_size_previous = mp_sz;
 		mp_sz++;
 	}
-	// //-------------------------------------------
-	// printFromHead(ttr);
-	if (!(mp = ft_strnew((size_t)(mp_sz * mp_sz))))
+	if (!(mp = ft_create_map(mp_sz)))
 		return ;
-	ft_memset(mp,(int)('.'),(mp_sz * mp_sz));	
-	ft_recursion(ttr, mp_sz, mp);
+	while (ft_recursion(ttr, mp_sz, mp) != 1)
+	{
+		free(mp);
+		map_size_previous = mp_sz;
+		mp_sz++;
+		ft_decode_tetri(ttr, map_size_previous, mp_sz);
+		if (!(mp = ft_create_map(mp_sz)))
+			return ;		
+	}
 	ft_print_map(mp, mp_sz);
 	return ;
 }
@@ -87,10 +92,10 @@ void		fillit(char *argv)
 
 int		ft_recursion(t_tetri *ttr, int mp_sz, char *mp)
 {
-	int		a;
-	int		indx;
-	int		strt_pnt;
-	char	*mp_tmp;
+	int			a;
+	int			indx;
+	int			strt_pnt;
+	char		*mp_tmp;
 
 	a = -1;
 	if (!(ttr->c))
@@ -117,10 +122,10 @@ int		ft_recursion(t_tetri *ttr, int mp_sz, char *mp)
 
 int		ft_try_tetri(t_tetri *ttr, int mp_sz, char *mp, int strt_pnt)
 {
-	int		indx;
-	int		flg_sccss;
+	int			indx;
+	int			flg_sccss;
 
-	while (strt_pnt < mp_sz * mp_sz - 4)
+	while (strt_pnt < mp_sz * mp_sz - 3)
 	{
 		flg_sccss = 4;
 		indx = -1;
@@ -140,17 +145,29 @@ int		ft_try_tetri(t_tetri *ttr, int mp_sz, char *mp, int strt_pnt)
 
 void	ft_print_map(char *mp, int mp_sz)
 {
-	int nm_strs;
-	int	nm_smbls;
+	int			nm_strs;
+	int			nm_smbls;
 
 	nm_strs = mp_sz;
 	while (nm_strs--)
 	{
 		nm_smbls = mp_sz;
 		while (nm_smbls--)
-		{
 			ft_putchar(*mp++);
-		}
 		ft_putchar('\n');
 	}	
+}
+
+char	*ft_create_map(int mp_sz)
+{
+	char	*mp;
+
+	if (mp_sz * mp_sz == (size_t)(-1))
+		return (NULL);
+	mp = (char*)malloc(mp_sz * mp_sz + 1);
+	if (!mp)
+		return (NULL);
+	mp = (char*)ft_memset(mp, (int)('.'), (mp_sz * mp_sz));
+	mp[mp_sz * mp_sz] = '\0';
+	return (mp);	
 }

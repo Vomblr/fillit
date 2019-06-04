@@ -6,12 +6,11 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/03 21:38:32 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/04 19:11:04 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
-#include <errno.h>
 
 // int		main(int argc, char **argv)
 // {
@@ -22,7 +21,7 @@
 // }
 int		main(void)
 {
-	char *argv = "tests/test5_valid.txt";
+	char *argv = "../tests/test5_valid.txt";
 	fillit(argv);
 	return (0);
 }
@@ -80,7 +79,7 @@ void		fillit(char *argv)
 		return ;
 	ft_memset(mp,(int)('.'),(mp_sz * mp_sz));	
 	ft_recursion(ttr, mp_sz, mp);
-	printf("%s", mp);
+	ft_print_map(mp, mp_sz);
 	return ;
 }
 	// else
@@ -93,57 +92,27 @@ int		ft_recursion(t_tetri *ttr, int mp_sz, char *mp)
 	int		strt_pnt;
 	char	*mp_tmp;
 
-	indx = -1;
-	strt_pnt = 0;
-	a = 1;
+	a = -1;
 	if (!(ttr->c))
 		return (1);		
-	if ((strt_pnt = ft_try_tetri(ttr, mp_sz, mp, strt_pnt)) == -1)
-	{
-		ft_strcpy(mp, mp_tmp);
-		// free(mp_tmp);
+	if ((strt_pnt = ft_try_tetri(ttr, mp_sz, mp, 0)) == -1)
 		return (-1);
-	}
-	// if (ttr->c == 'A')
-	// {
-	// 	mp_sz++;
-	// 	ft_decode_tetri(ttr, mp_sz - 1, mp_sz);
-	// 	if (!(mp = ft_strnew((size_t)(mp_sz * mp_sz))))
-	// 		return (-1);
-	// 	ft_memset(mp, (int)('.'), (mp_sz * mp_sz));		
-	// }
-	// else
-	// {
-	// 	return (-1);
-	// }
 	if (!(mp_tmp = ft_strnew(mp_sz * mp_sz)))
 		return (-1);
 	ft_strcpy(mp_tmp, mp);
 	indx = -1;
 	while (++indx < 4)
 		mp[strt_pnt + ttr->x[indx]] = ttr->c;
-	while ((a = ft_recursion(ttr->next, mp_sz, mp)) != 1 && (strt_pnt = ft_try_tetri(ttr, mp_sz, mp, ++strt_pnt)) != -1)
+	while ((a = ft_recursion(ttr->next, mp_sz, mp)) != 1 && strt_pnt != -1)
 	{
-// 		if (!mp_tmp)
-// 		{
-// 			if (!(mp_tmp = ft_strnew(mp_sz * mp_sz)))
-// 				return (-1);
-// 			ft_strcpy(mp_tmp, mp);
-// 		}
-// 		else
-// 		{
 		ft_strcpy(mp, mp_tmp);
-// 		}		
+		if ((strt_pnt = ft_try_tetri(ttr, mp_sz, mp, ++strt_pnt)) == -1)
+			return (-1);
 		indx = -1;
 		while (++indx < 4)
 			mp[strt_pnt + ttr->x[indx]] = ttr->c;
-		// if ((a = ft_recursion(ttr->next, mp_sz, mp)) == 1)
-		// {	
-		// 	// free(mp_tmp);
-		// 	return (a);
-		// }
 	}
-	return ((a != 1 || strt_pnt == -1)? -1, 1);
+	return ((a != 1 && strt_pnt == -1) ? -1 : 1);
 }
 
 int		ft_try_tetri(t_tetri *ttr, int mp_sz, char *mp, int strt_pnt)
@@ -159,7 +128,7 @@ int		ft_try_tetri(t_tetri *ttr, int mp_sz, char *mp, int strt_pnt)
 		{
 			if (strt_pnt + ttr->x[indx] > mp_sz * mp_sz)
 				return (-1);
-			if ((mp[strt_pnt + ttr->x[indx]] != '.') || (indx > 0 && (ttr->x[indx] - ttr->x[indx - 1] == 1) && (strt_pnt + ttr->x[indx] % mp_sz == 0)))
+			if ((mp[strt_pnt + ttr->x[indx]] != '.') || (indx > 0 && (ttr->x[indx] - ttr->x[indx - 1] == 1) && ((strt_pnt + ttr->x[indx]) % mp_sz == 0)))
 				flg_sccss--;
 		}
 		if (flg_sccss == 4)
@@ -167,4 +136,21 @@ int		ft_try_tetri(t_tetri *ttr, int mp_sz, char *mp, int strt_pnt)
 		strt_pnt++;
 	}
 	return (-1);
+}
+
+void	ft_print_map(char *mp, int mp_sz)
+{
+	int nm_strs;
+	int	nm_smbls;
+
+	nm_strs = mp_sz;
+	while (nm_strs--)
+	{
+		nm_smbls = mp_sz;
+		while (nm_smbls--)
+		{
+			ft_putchar(*mp++);
+		}
+		ft_putchar('\n');
+	}	
 }

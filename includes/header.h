@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:23:19 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/01 21:04:45 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/04 19:11:00 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
+#include <errno.h>
 
 typedef struct		s_tetri
 {
@@ -42,5 +43,6 @@ t_tetri	*stock_tetri(char *str, int num_tetraminos);
 int		ft_decode_tetri(t_tetri *tetrimino, int map_size_prev, int map_size_current);
 int		ft_recursion(t_tetri *tetri, int map_size, char *map);
 int		ft_try_tetri(t_tetri *ttr, int mp_sz, char *mp, int strt_pnt);
+void	ft_print_map(char *mp, int mp_sz);
 
 #endif

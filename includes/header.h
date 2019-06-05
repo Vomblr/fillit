@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:23:19 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/05 16:21:54 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/05 17:02:59 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct		s_tetri
 void	usage(void);
 void	error(void);
 int		check_count_pcs_newstr(int fd, char *line);
-void	fillit(char *argv);
+void	fillit(t_tetri *ttr, int nm_ttr);
 int		check_pcs_links(char *stock, int j);
 int		valid_pcs(char *stock, int j);
 int		check_str(char *stock);

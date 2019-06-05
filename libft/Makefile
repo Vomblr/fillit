@@ -6,28 +6,17 @@
 #    By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/15 19:18:54 by klekisha          #+#    #+#              #
-#    Updated: 2019/06/05 12:54:27 by klekisha         ###   ########.fr        #
+#    Updated: 2019/06/05 12:53:19 by klekisha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-NAME = fillit
+NAME = libft.a
 
-NAME_LIBFT = libft.a
+CFLAGS = -Wall -Wextra -Werror -I. -c
 
-AUTHORS = klekisha\nmcomet
-
-PROJ_DIR = sources
-
-LIBFT_DIR = libft
-
-INCL_DIR = includes
-
-CFLAGS = -Wall -Wextra -Werror -I $(INCL_DIR)
-
-LIBFT_SOURCES =	\
-		ft_atoi.c \
+SOURCES =	ft_atoi.c \
   		ft_bzero.c \
   		ft_isalnum.c \
   		ft_isalpha.c \
@@ -89,47 +78,22 @@ LIBFT_SOURCES =	\
   		ft_strncpy.c \
   		ft_abs.c \
 		ft_count_words.c \
-		ft_recursive_power.c \
-		ft_sqrt.c
+		ft_recursive_power.c
 
-LIBFT_OBJECTS = $(LIBFT_SOURCES:%.c=%.o)
-
-LIBFT_DIR_AND_SOURCES = $(LIBFT_SOURCES:%.c= $(LIBFT_DIR)/%.c)
-
-LIBFT_DIR_AND_OBJECTS = $(LIBFT_DIR_AND_SOURCES:%.c=%.o)
-
-PROJ_SOURCES = \
-		main.c \
-		functions.c \
-		error.c
-
-PROJ_OBJECTS = $(PROJ_SOURCES:%.c=%.o)
-
-PROJ_DIR_AND_SOURCES = $(PROJ_SOURCES:%.c= $(PROJ_DIR)/%.c)
-
-PROJ_DIR_AND_OBJECTS = $(PROJ_DIR_AND_SOURCES:%.c= %.o)
+OBJECTS = $(SOURCES:%.c=%.o)
 
 all: $(NAME)
 
-$(NAME): $(PROJ_DIR_AND_OBJECTS)
-	make -C $(LIBFT_DIR)
-	$(CC) -o $(NAME) $(PROJ_DIR_AND_SOURCES) $(CFLAGS) -L $(LIBFT_DIR) -lft
+$(NAME): $(OBJECTS)
+	ar rcs $(NAME) $(OBJECTS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -o $@ $<
 
 clean:
-	/bin/rm -f $(LIBFT_DIR_AND_OBJECTS) $(PROJ_DIR_AND_OBJECTS) $(LIBFT_DIR)/$(NAME_LIBFT)
+	rm -rf $(OBJECTS)
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	rm -rf $(NAME)
 
 re: fclean all
-
-lib: $(NAME_LIBFT)
-
-$(NAME_LIBFT): $(LIBFT_DIR_AND_OBJECTS)
-	ar rcs $(LIBFT_DIR)/$(NAME_LIBFT) $(LIBFT_DIR_AND_OBJECTS)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<

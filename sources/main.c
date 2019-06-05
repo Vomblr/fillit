@@ -6,37 +6,27 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/05 09:41:10 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/05 13:31:04 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/header.h"
 
-int		main(int argc, char **argv)
-{
-	if (argc != 2)
-		usage();
-	fillit(argv[1]);
-	return (0);
-}
-// int		main(void)
+// int		main(int argc, char **argv)
 // {
-// 	char *argv = "tests/test3_valid.txt";
-// 	fillit(argv);
+// 	if (argc != 2)
+// 		usage();
+// 	fillit(argv[1]);
 // 	return (0);
 // }
-void printFromHead(const t_tetri* list) { //TEST FUNCTION!!!
-	if (list->next) {
-		int i = 0;
-		printf("TETRIMIN[%c]:\t", list->c);
-		while (i != 4)
-		{
-			printf("%d  ", list->x[i]);
-			i++;
-		}
-		putchar('\n');
-		printFromHead(list->next);
-	}
+int		main(void)
+{
+	// char *argv = "tests/test3_valid.txt";
+	// char *argv = "tests/valid_7";
+	// char *argv = "tests/valid_11";
+	char *argv = "tests/valid_18";
+	fillit(argv);
+	return (0);
 }
 
 void		fillit(char *argv)
@@ -56,8 +46,7 @@ void		fillit(char *argv)
 	mp_sz = 2;	
 	map_size_previous = 4;
 	a = 0;
-	fd = open(argv, O_RDONLY); //error check is located in "check_count_pcs_newstr"
-	// printf("%i\n", errno);
+	fd = open(argv, O_RDONLY); 
 	if (!(stock = (char *) malloc(sizeof(char) * 650)))
 		error();
 	num_tetraminos = check_count_pcs_newstr(fd, stock);

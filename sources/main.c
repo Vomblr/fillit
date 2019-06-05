@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/05 14:08:20 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/05 16:06:45 by mcomet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,12 @@ void		fillit(char *argv)
 	char		*mp;
 	int			a;
 
-	//char 	*stock;
-	//t_tetri	tetrimino;
-
-	mp_sz = 2;	
+	mp_sz = 2;
 	map_size_previous = 4;
 	a = 0;
-	fd = open(argv, O_RDONLY); 
-	if (!(stock = (char *) malloc(sizeof(char) * 650)))
+	opencheckstock(argv);
+	fd = open(argv, O_RDONLY);
+	if (!(stock = (char *)malloc(sizeof(char) * 650)))
 		error();
 	num_tetraminos = check_count_pcs_newstr(fd, stock);
 	if (!check_str(stock))
@@ -70,7 +68,7 @@ void		fillit(char *argv)
 		mp_sz++;
 		ft_decode_tetri(ttr, map_size_previous, mp_sz);
 		if (!(mp = ft_create_map(mp_sz)))
-			return ;		
+			return ;
 	}
 	ft_print_map(mp, mp_sz);
 	return ;
@@ -87,7 +85,7 @@ int		ft_recursion(t_tetri *ttr, int mp_sz, char *mp)
 
 	a = -1;
 	if (!(ttr->c))
-		return (1);		
+		return (1);
 	if ((strt_pnt = ft_try_tetri(ttr, mp_sz, mp, 0)) == -1)
 		return (-1);
 	if (!(mp_tmp = ft_strnew(mp_sz * mp_sz)))
@@ -125,7 +123,7 @@ int		ft_try_tetri(t_tetri *ttr, int mp_sz, char *mp, int strt_pnt)
 				flg_sccss--;
 		}
 		if (flg_sccss == 4)
-			return (strt_pnt);		
+			return (strt_pnt);
 		strt_pnt++;
 	}
 	return (-1);
@@ -143,7 +141,7 @@ void	ft_print_map(char *mp, int mp_sz)
 		while (nm_smbls--)
 			ft_putchar(*mp++);
 		ft_putchar('\n');
-	}	
+	}
 }
 
 char	*ft_create_map(int mp_sz)
@@ -157,5 +155,5 @@ char	*ft_create_map(int mp_sz)
 		return (NULL);
 	mp = (char*)ft_memset(mp, (int)('.'), (mp_sz * mp_sz));
 	mp[mp_sz * mp_sz] = '\0';
-	return (mp);	
+	return (mp);
 }

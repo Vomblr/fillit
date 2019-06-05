@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 20:33:39 by klekisha          #+#    #+#             */
-/*   Updated: 2019/05/31 19:40:54 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/05 14:59:54 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,14 +131,13 @@ void		set_tetri(t_tetri **tmp, char *str)
 	{
 		if (str[i] == '#')
 		{
-			// частные случаи фигур, которые начинаются не с нуля
 			if ((str[i + 1] == '#' && str[i + 4] == '#' && str[i + 5] == '#') ||
 					(str[i + 4] == '#' && str[i + 5] == '#' && str[i + 6] == '#') ||
 					(str[i + 5] == '#' && str[i + 9] == '#' && str[i + 10] == '#') ||
 					(str[i + 4] == '#' && str[i + 5] == '#' && str[i + 10] == '#') ||
 					(str[i + 4] == '#' && str[i + 5] == '#' && str[i + 9] == '#'))
 				z = 1;
-			else if (str[i + 2] == '#' && str[i + 3] == '#' && str[i + 4] == '#')
+			else if (str[i + 3] == '#' && str[i + 4] == '#' && str[i + 5] == '#')
 				z = 2;
 			(*tmp)->x[j] = z;
 			j++;
@@ -222,4 +221,15 @@ int		ft_decode_tetri(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
 		tetrimino = tetrimino->next;
 	}
 	return (1);
+}
+
+void	opencheckstock(char *argv, char *stock, int *nm_ttr)
+{
+	int fd;
+
+	fd = open(argv, O_RDONLY);
+	*nm_ttr = check_count_pcs_newstr(fd, stock);
+	if (!check_str(stock))
+		error();
+	close(fd);
 }

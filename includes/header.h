@@ -45,5 +45,6 @@ int		ft_recursion(t_tetri *tetri, int map_size, char *map);
 int		ft_try_tetri(t_tetri *ttr, int mp_sz, char *mp, int strt_pnt);
 void	ft_print_map(char *mp, int mp_sz);
 char	*ft_create_map(int mp_sz);
+void	opencheckstock(char *argv, char *stock, int *nm_ttr);
 
 #endif

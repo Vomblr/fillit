@@ -6,7 +6,7 @@
 /*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/05 16:06:45 by mcomet           ###   ########.fr       */
+/*   Updated: 2019/06/05 15:58:46 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@ int		main(int argc, char **argv)
 // int		main(void)
 // {
 // 	// char *argv = "tests/test3_valid.txt";
-// 	// char *argv = "tests/valid_7";
+// 	// char *argv = "wrong_tetri.txt";
+// 	char *argv = "tests/valid_7";
 // 	// char *argv = "tests/valid_11";
-// 	char *argv = "tests/valid_18";
+// 	// char *argv = "tests/valid_18";
 // 	fillit(argv);
 // 	return (0);
 // }
 
 void		fillit(char *argv)
 {
-	int			num_tetraminos;
+	int			nm_ttr;
 	int			mp_sz;
-	int			map_size_previous;
+	int			mp_sz_prvs;
 	int			fd;
 	char		*stock;
 	t_tetri		*ttr;
@@ -41,22 +42,24 @@ void		fillit(char *argv)
 	int			a;
 
 	mp_sz = 2;
-	map_size_previous = 4;
+	//map_size_previous = 4;
+	mp_sz = 2;	
+	mp_sz_prvs = 4;
 	a = 0;
-	opencheckstock(argv);
-	fd = open(argv, O_RDONLY);
 	if (!(stock = (char *)malloc(sizeof(char) * 650)))
 		error();
-	num_tetraminos = check_count_pcs_newstr(fd, stock);
-	if (!check_str(stock))
+	opencheckstock(argv, stock, &nm_ttr);
+	//fd = open(argv, O_RDONLY);
+	//nm_ttr = check_count_pcs_newstr(fd, stock);
+	//if (!check_str(stock))
 		error();
-	close(fd);
-	ttr = stock_tetri(stock, num_tetraminos);
-	while (mp_sz * mp_sz < num_tetraminos * 4)
+	//close(fd);
+	ttr = stock_tetri(stock, nm_ttr);
+	while (mp_sz * mp_sz < nm_ttr * 4)
 		mp_sz++;
-	while (ft_decode_tetri(ttr, map_size_previous, mp_sz) == 0)
+	while (ft_decode_tetri(ttr, mp_sz_prvs, mp_sz) == 0)
 	{
-		map_size_previous = mp_sz;
+		mp_sz_prvs = mp_sz;
 		mp_sz++;
 	}
 	if (!(mp = ft_create_map(mp_sz)))
@@ -64,9 +67,9 @@ void		fillit(char *argv)
 	while (ft_recursion(ttr, mp_sz, mp) != 1)
 	{
 		free(mp);
-		map_size_previous = mp_sz;
+		mp_sz_prvs = mp_sz;
 		mp_sz++;
-		ft_decode_tetri(ttr, map_size_previous, mp_sz);
+		ft_decode_tetri(ttr, mp_sz_prvs, mp_sz);
 		if (!(mp = ft_create_map(mp_sz)))
 			return ;
 	}
@@ -119,7 +122,11 @@ int		ft_try_tetri(t_tetri *ttr, int mp_sz, char *mp, int strt_pnt)
 		{
 			if (strt_pnt + ttr->x[indx] > mp_sz * mp_sz)
 				return (-1);
-			if ((mp[strt_pnt + ttr->x[indx]] != '.') || (indx > 0 && (ttr->x[indx] - ttr->x[indx - 1] == 1) && ((strt_pnt + ttr->x[indx]) % mp_sz == 0)))
+			if ((mp_sz == 3 && ((ttr->x[indx] == indx) || (ttr->x[indx] == indx + 2))) && (mp[strt_pnt + ttr->x[indx]] != '.' || (strt_pnt != 0 && strt_pnt != 3)))
+					flg_sccss--;
+			if (ttr->x[indx] > mp_sz * mp_sz || (mp[strt_pnt + ttr->x[indx]] != '.') || (mp_sz <= 3 && indx > 0 && (ttr->x[indx] - ttr->x[indx - 1] == 1) && ((strt_pnt + ttr->x[indx]) % mp_sz == 0) && (ttr->x[indx] != indx) && (ttr->x[indx] != indx + 2)))
+				flg_sccss--;
+			if (ttr->x[indx] > mp_sz * mp_sz || (mp[strt_pnt + ttr->x[indx]] != '.') || (mp_sz > 3 && indx > 0 && (ttr->x[indx] - ttr->x[indx - 1] == 1) && ((strt_pnt + ttr->x[indx]) % mp_sz == 0)))
 				flg_sccss--;
 		}
 		if (flg_sccss == 4)

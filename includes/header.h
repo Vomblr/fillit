@@ -12,7 +12,6 @@
 
 #ifndef HEADER_H
 # define HEADER_H
-
 # include "../libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
@@ -43,5 +42,6 @@ int					ft_tr_ttr(t_tetri *ttr, int mp_sz, char *mp, int strt_pnt);
 void				ft_print_map(char *mp, int mp_sz);
 char				*ft_create_map(int mp_sz);
 void				opencheckstock(char *argv, char *stock, int *nm_ttr);
+void 				freeList(t_tetri *head);
 
 #endif

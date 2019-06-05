@@ -29,7 +29,7 @@ int		main(int argc, char **argv)
 	ttr = stock_tetri(stock, nm_ttr);
 	fillit(ttr, nm_ttr);
 	free(stock);
-	free(ttr);
+	freeList(ttr);
 	return (0);
 }
 

@@ -40,3 +40,15 @@ char	*ft_create_map(int mp_sz)
 	mp[mp_sz * mp_sz] = '\0';
 	return (mp);
 }
+
+void freeList(t_tetri *head)
+{
+	t_tetri	*tmp;
+
+	while (head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
+}

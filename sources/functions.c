@@ -89,6 +89,7 @@ void		set_tetri(t_tetri **tmp, char *s)
 		if (z && s[i] != '#' && s[i] != '\n')
 			z++;
 	}
+	//free(s);
 }
 
 t_tetri		*stock_tetri(char *str, int num_tetraminos)

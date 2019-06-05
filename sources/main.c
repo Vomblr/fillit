@@ -57,6 +57,7 @@ void	fillit(t_tetri *ttr, int nm_ttr)
 			return ;
 	}
 	ft_print_map(mp, mp_sz);
+	free(mp);
 }
 
 int		ft_rcrsn(t_tetri *ttr, int mp_sz, char *mp)

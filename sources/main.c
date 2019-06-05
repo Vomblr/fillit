@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/04 20:51:30 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/05 09:41:10 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void		fillit(char *argv)
 	char		*stock;
 	t_tetri		*ttr;
 	char		*mp;
-	int			strt_pnt;
 	int			a;
 
 	//char 	*stock;
@@ -162,7 +161,7 @@ char	*ft_create_map(int mp_sz)
 {
 	char	*mp;
 
-	if (mp_sz * mp_sz == (size_t)(-1))
+	if ((size_t)(mp_sz * mp_sz) == (size_t)(-1))
 		return (NULL);
 	mp = (char*)malloc(mp_sz * mp_sz + 1);
 	if (!mp)

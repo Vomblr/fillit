@@ -28,6 +28,8 @@ int		main(int argc, char **argv)
 	opencheckstock(argv[1], stock, &nm_ttr);
 	ttr = stock_tetri(stock, nm_ttr);
 	fillit(ttr, nm_ttr);
+	free(stock);
+	free(ttr);
 	return (0);
 }
 

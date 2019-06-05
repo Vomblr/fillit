@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/05 16:21:17 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/05 16:29:45 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ int		main(int argc, char **argv)
 	fillit(argv[1]);
 	return (0);
 }
-// int		main(void)
-// {
-// 	// char *argv = "tests/test3_valid.txt";
-// 	// char *argv = "wrong_tetri.txt";
-// 	char *argv = "tests/valid_7";
-// 	// char *argv = "tests/valid_11";
-// 	// char *argv = "tests/valid_18";
-// 	fillit(argv);
-// 	return (0);
-// }
 
 void		fillit(char *argv)
 {
@@ -41,13 +31,10 @@ void		fillit(char *argv)
 	char		*mp;
 	int			a;
 
-	//char 	*stock;
-	//t_tetri	tetrimino;
-
-	mp_sz = 2;	
+	mp_sz = 2;
 	mp_sz_prvs = 4;
 	a = 0;
-	fd = open(argv, O_RDONLY); 
+	fd = open(argv, O_RDONLY);
 	if (!(stock = (char *) malloc(sizeof(char) * 650)))
 		error();
 	nm_ttr = check_count_pcs_newstr(fd, stock);
@@ -71,13 +58,11 @@ void		fillit(char *argv)
 		mp_sz++;
 		ft_decode_tetri(ttr, mp_sz_prvs, mp_sz);
 		if (!(mp = ft_create_map(mp_sz)))
-			return ;		
+			return ;
 	}
 	ft_print_map(mp, mp_sz);
 	return ;
 }
-	// else
-	// 	ft_putstr("VALID FILE");
 
 int		ft_rcrsn(t_tetri *ttr, int mp_sz, char *mp)
 {
@@ -85,10 +70,9 @@ int		ft_rcrsn(t_tetri *ttr, int mp_sz, char *mp)
 	int			i;
 	int			strt;
 	char		*mp_tmp;
-
 	a = -1;
 	if (!(ttr->c))
-		return (1);		
+		return (1);
 	if ((strt = ft_tr_ttr(ttr, mp_sz, mp, 0)) == -1)
 		return (-1);
 	if (!(mp_tmp = ft_strnew(mp_sz * mp_sz)))
@@ -113,7 +97,6 @@ int		ft_tr_ttr(t_tetri *ttr, int mp_sz, char *mp, int strt)
 {
 	int			i;
 	int			flg_sccss;
-
 	while (strt < mp_sz * mp_sz - 3)
 	{
 		flg_sccss = 4;
@@ -130,7 +113,7 @@ int		ft_tr_ttr(t_tetri *ttr, int mp_sz, char *mp, int strt)
 				flg_sccss--;
 		}
 		if (flg_sccss == 4)
-			return (strt);		
+			return (strt);
 		strt++;
 	}
 	return (-1);
@@ -140,7 +123,6 @@ void	ft_print_map(char *mp, int mp_sz)
 {
 	int			nm_strs;
 	int			nm_smbls;
-
 	nm_strs = mp_sz;
 	while (nm_strs--)
 	{
@@ -148,13 +130,12 @@ void	ft_print_map(char *mp, int mp_sz)
 		while (nm_smbls--)
 			ft_putchar(*mp++);
 		ft_putchar('\n');
-	}	
+	}
 }
 
 char	*ft_create_map(int mp_sz)
 {
 	char	*mp;
-
 	if ((size_t)(mp_sz * mp_sz) == (size_t)(-1))
 		return (NULL);
 	mp = (char*)malloc(mp_sz * mp_sz + 1);
@@ -162,5 +143,5 @@ char	*ft_create_map(int mp_sz)
 		return (NULL);
 	mp = (char*)ft_memset(mp, (int)('.'), (mp_sz * mp_sz));
 	mp[mp_sz * mp_sz] = '\0';
-	return (mp);	
+	return (mp);
 }

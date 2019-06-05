@@ -6,7 +6,7 @@
 #    By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/15 19:18:54 by klekisha          #+#    #+#              #
-#    Updated: 2019/06/05 16:08:38 by klekisha         ###   ########.fr        #
+#    Updated: 2019/06/05 18:06:48 by klekisha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,6 +101,7 @@ LIBFT_DIR_AND_OBJECTS = $(LIBFT_DIR_AND_SOURCES:%.c=%.o)
 PROJ_SOURCES = \
 		main.c \
 		functions.c \
+		functions_2.c \
 		error.c
 
 PROJ_OBJECTS = $(PROJ_SOURCES:%.c=%.o)

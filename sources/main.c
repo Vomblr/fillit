@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/05 17:48:29 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/05 18:12:03 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ int		main(int argc, char **argv)
 	int			nm_ttr;
 
 	if (argc != 2)
-		usage();
+	{
+		write(1, "usage: ./fillit <FILE_MAP>\n", 27);
+		exit(0);
+	}
 	if (!(stock = (char *)malloc(sizeof(char) * 650)))
 		error();
 	opencheckstock(argv[1], stock, &nm_ttr);
@@ -28,7 +31,7 @@ int		main(int argc, char **argv)
 	return (0);
 }
 
-void		fillit(t_tetri *ttr, int nm_ttr)
+void	fillit(t_tetri *ttr, int nm_ttr)
 {
 	int			mp_sz;
 	int			mp_sz_prvs;
@@ -52,7 +55,6 @@ void		fillit(t_tetri *ttr, int nm_ttr)
 			return ;
 	}
 	ft_print_map(mp, mp_sz);
-	return ;
 }
 
 int		ft_rcrsn(t_tetri *ttr, int mp_sz, char *mp)
@@ -110,33 +112,4 @@ int		ft_tr_ttr(t_tetri *ttr, int mp_sz, char *mp, int strt)
 		strt++;
 	}
 	return (-1);
-}
-
-void	ft_print_map(char *mp, int mp_sz)
-{
-	int			nm_strs;
-	int			nm_smbls;
-
-	nm_strs = mp_sz;
-	while (nm_strs--)
-	{
-		nm_smbls = mp_sz;
-		while (nm_smbls--)
-			ft_putchar(*mp++);
-		ft_putchar('\n');
-	}
-}
-
-char	*ft_create_map(int mp_sz)
-{
-	char	*mp;
-
-	if ((size_t)(mp_sz * mp_sz) == (size_t)(-1))
-		return (NULL);
-	mp = (char*)malloc(mp_sz * mp_sz + 1);
-	if (!mp)
-		return (NULL);
-	mp = (char*)ft_memset(mp, (int)('.'), (mp_sz * mp_sz));
-	mp[mp_sz * mp_sz] = '\0';
-	return (mp);
 }

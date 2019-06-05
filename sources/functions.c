@@ -16,21 +16,21 @@ int		check_count_pcs_newstr(int fd, char *str)
 {
 	int		i;
 	int		ret;
-	char	buff[2];
+	char	buf[2];
 	int		j;
 
 	i = 1;
 	if ((fd < 0))
 		usage();
 	j = 0;
-	while ((ret = read(fd, buff, 1)))
+	while ((ret = read(fd, buf, 1)))
 	{
-		buff[ret] = '\0';
-		if (buff[0] != '.' && buff[0] != '#' && buff[0] != '\n' && buff[0] != '\0')
+		buf[ret] = '\0';
+		if (buf[0] != '.' && buf[0] != '#' && buf[0] != '\n' && buf[0] != '\0')
 			error();
-		str[j] = buff[0];
+		str[j] = buf[0];
 		j++;
-		if (buff[0] == '\n')
+		if (buf[0] == '\n')
 			i++;
 	}
 	str[j] = '\0';
@@ -41,7 +41,7 @@ int		check_count_pcs_newstr(int fd, char *str)
 	return (0);
 }
 
-int check_pcs_links(char *stock, int j)
+int			check_pcs_links(char *stock, int j)
 {
 	int	link;
 	int i;
@@ -68,7 +68,7 @@ int check_pcs_links(char *stock, int j)
 	return (0);
 }
 
-int		valid_pcs(char *stock, int j)
+int			valid_pcs(char *stock, int j)
 {
 	int dash;
 	int dot;
@@ -94,7 +94,7 @@ int		valid_pcs(char *stock, int j)
 	return (0);
 }
 
-int		check_str(char *stock)
+int			check_str(char *stock)
 {
 	int	i;
 	int j;
@@ -118,7 +118,7 @@ int		check_str(char *stock)
 	return (1);
 }
 
-void		set_tetri(t_tetri **tmp, char *str)
+void		set_tetri(t_tetri **tmp, char *s)
 {
 	int	i;
 	int	j;
@@ -127,29 +127,29 @@ void		set_tetri(t_tetri **tmp, char *str)
 	i = 0;
 	j = 0;
 	z = 0;
-	while (str[i] != '\0')
+	while (s[i] != '\0')
 	{
-		if (str[i] == '#')
+		if (s[i] == '#')
 		{
-			if ((str[i + 1] == '#' && str[i + 4] == '#' && str[i + 5] == '#') ||
-					(str[i + 4] == '#' && str[i + 5] == '#' && str[i + 6] == '#') ||
-					(str[i + 5] == '#' && str[i + 9] == '#' && str[i + 10] == '#') ||
-					(str[i + 4] == '#' && str[i + 5] == '#' && str[i + 10] == '#') ||
-					(str[i + 4] == '#' && str[i + 5] == '#' && str[i + 9] == '#'))
+			if ((s[i + 1] == '#' && s[i + 4] == '#' && s[i + 5] == '#') ||
+					(s[i + 4] == '#' && s[i + 5] == '#' && s[i + 6] == '#') ||
+					(s[i + 5] == '#' && s[i + 9] == '#' && s[i + 10] == '#') ||
+					(s[i + 4] == '#' && s[i + 5] == '#' && s[i + 10] == '#') ||
+					(s[i + 4] == '#' && s[i + 5] == '#' && s[i + 9] == '#'))
 				z = 1;
-			else if (str[i + 3] == '#' && str[i + 4] == '#' && str[i + 5] == '#')
+			else if (s[i + 3] == '#' && s[i + 4] == '#' && s[i + 5] == '#')
 				z = 2;
 			(*tmp)->x[j] = z;
 			j++;
 			z++;
 		}
-		if (z && str[i] != '#' && str[i] != '\n')
+		if (z && s[i] != '#' && s[i] != '\n')
 			z++;
 		i++;
 	}
 }
 
-t_tetri		*stock_tetri(char *str, int num_tetraminos)
+t_tetri			*stock_tetri(char *str, int num_tetraminos)
 {
 	int		plus21;
 	char 	c;
@@ -199,7 +199,7 @@ t_tetri		*stock_tetri(char *str, int num_tetraminos)
 	
 // }
 
-int		ft_decode_tetri(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
+int				ft_decode_tetri(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
 {
 	int		indx;
 	int		tmp;
@@ -223,7 +223,7 @@ int		ft_decode_tetri(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
 	return (1);
 }
 
-void	opencheckstock(char *argv, char *stock, int *nm_ttr)
+void			opencheckstock(char *argv, char *stock, int *nm_ttr)
 {
 	int fd;
 

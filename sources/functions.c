@@ -12,62 +12,6 @@
 
 #include "../includes/header.h"
 
-int		check_count_pcs_newstr(int fd, char *str)
-{
-	int		i;
-	int		ret;
-	char	buf[2];
-	int		j;
-
-	i = 1;
-	if ((fd < 0))
-		usage();
-	j = 0;
-	while ((ret = read(fd, buf, 1)))
-	{
-		buf[ret] = '\0';
-		if (buf[0] != '.' && buf[0] != '#' && buf[0] != '\n' && buf[0] != '\0')
-			error();
-		str[j] = buf[0];
-		j++;
-		if (buf[0] == '\n')
-			i++;
-	}
-	str[j] = '\0';
-	if ((i % 5) == 0 && (i = (i / 5)) <= 26)
-		return (i);
-	else
-		error();
-	return (0);
-}
-
-int			check_pcs_links(char *stock, int j)
-{
-	int	link;
-	int i;
-
-	i = 0;
-	link = 0;
-	while (i + j < 20 + j)
-	{
-		if (stock[i + j] == '#')
-		{
-			if ((i + j + 1) < (20 + j) && stock[i + j + 1] == '#')
-				link++;
-			if ((i + j - 1) >= (0 + j) && stock[i + j - 1] == '#')
-				link++;
-			if ((i + j + 5) < (20 + j) && stock[i + j + 5] == '#')
-				link++;
-			if ((i + j - 5) >= (0 + j) && stock[i + j - 5] == '#')
-				link++;
-		}
-		i++;
-	}
-	if (link == 6 || link == 8)
-		return (1);
-	return (0);
-}
-
 int			valid_pcs(char *stock, int j)
 {
 	int dash;
@@ -124,10 +68,10 @@ void		set_tetri(t_tetri **tmp, char *s)
 	int	j;
 	int z;
 
-	i = 0;
-	j = 0;
+	i = -1;
+	j = -1;
 	z = 0;
-	while (s[i] != '\0')
+	while (s[++i] != '\0')
 	{
 		if (s[i] == '#')
 		{
@@ -139,22 +83,20 @@ void		set_tetri(t_tetri **tmp, char *s)
 				z = 1;
 			else if (s[i + 3] == '#' && s[i + 4] == '#' && s[i + 5] == '#')
 				z = 2;
-			(*tmp)->x[j] = z;
-			j++;
+			(*tmp)->x[++j] = z;
 			z++;
 		}
 		if (z && s[i] != '#' && s[i] != '\n')
 			z++;
-		i++;
 	}
 }
 
-t_tetri			*stock_tetri(char *str, int num_tetraminos)
+t_tetri		*stock_tetri(char *str, int num_tetraminos)
 {
-	int		plus21;
-	char 	c;
-	t_tetri	*tmp;
-	t_tetri	*stock;
+	int			plus21;
+	char		c;
+	t_tetri		*tmp;
+	t_tetri		*stock;
 
 	plus21 = 0;
 	c = 'A';
@@ -176,30 +118,7 @@ t_tetri			*stock_tetri(char *str, int num_tetraminos)
 	return (stock);
 }
 
-// /* 2 functions below check a case then map size 2 or 3 enough for tetraminos set */
-
-// int		ft_check_map_for_1_tetr(t_tetri tetrimino)
-// {
-// 	if (tetrimino.x[3] == 4 || tetrimino.x[3] == 12)
-// 		return (4);
-// 	if (tetrimino.x[0] == 0 && tetrimino.x[1] == 1 && tetrimino.x[2] == 4 && tetrimino.x[3] == 5)
-// 		return (2);
-// 	return (3);
-// }
-
-// int		ft_check_map_for_2_tetr(t_tetri tetrimino)
-// {
-// 	t_tetri		first_tetrimino;
-// 	t_tetri		second_tetrimino;
-
-// 	first_tetrimino = tetrimino;
-// 	second_tetrimino = *(tetrimino.next);
-// 	if ((ft_check_map_for_1_tetr(first_tetrimino)) == 4 || (ft_check_map_for_1_tetr(second_tetrimino)) == 4)
-// 		return (4);
-	
-// }
-
-int				ft_decode_tetri(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
+int			ft_decode_tetri(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
 {
 	int		indx;
 	int		tmp;
@@ -207,7 +126,7 @@ int				ft_decode_tetri(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
 	if (mp_sz_prvs == mp_sz_crrnt)
 		return (1);
 	if (mp_sz_crrnt > mp_sz_prvs)
-		if (tetrimino->x[3] % mp_sz_prvs / mp_sz_crrnt > 0 || 
+		if (tetrimino->x[3] % mp_sz_prvs / mp_sz_crrnt > 0 ||
 			tetrimino->x[2] % mp_sz_prvs / mp_sz_crrnt > 0)
 			return (0);
 	while (tetrimino->c)
@@ -216,20 +135,10 @@ int				ft_decode_tetri(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
 		while (++indx < 4)
 		{
 			tmp = tetrimino->x[indx];
-			tetrimino->x[indx] = tmp / mp_sz_prvs * mp_sz_crrnt + tmp % mp_sz_prvs;
+			tetrimino->x[indx] = tmp / mp_sz_prvs * mp_sz_crrnt +
+					tmp % mp_sz_prvs;
 		}
 		tetrimino = tetrimino->next;
 	}
 	return (1);
-}
-
-void			opencheckstock(char *argv, char *stock, int *nm_ttr)
-{
-	int fd;
-
-	fd = open(argv, O_RDONLY);
-	*nm_ttr = check_count_pcs_newstr(fd, stock);
-	if (!check_str(stock))
-		error();
-	close(fd);
 }

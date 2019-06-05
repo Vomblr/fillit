@@ -136,9 +136,9 @@ void		set_tetri(t_tetri **tmp, char *str)
 					(str[i + 4] == '#' && str[i + 5] == '#' && str[i + 6] == '#') ||
 					(str[i + 5] == '#' && str[i + 9] == '#' && str[i + 10] == '#') ||
 					(str[i + 4] == '#' && str[i + 5] == '#' && str[i + 10] == '#') ||
-					(str[i + 4] == '#' && str[i + 5] == '#' && str[i + 9] == '#')) ||
+					(str[i + 4] == '#' && str[i + 5] == '#' && str[i + 9] == '#'))
 				z = 1;
-			else if (str[i + 2] == '#' && str[i + 4] == '#' && str[i + 5] == '#')
+			else if (str[i + 2] == '#' && str[i + 3] == '#' && str[i + 4] == '#')
 				z = 2;
 			(*tmp)->x[j] = z;
 			j++;

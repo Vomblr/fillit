@@ -80,7 +80,10 @@ int		ft_rcrsn(t_tetri *ttr, int mp_sz, char *mp)
 	{
 		ft_strcpy(mp, mp_tmp);
 		if ((strt = ft_tr_ttr(ttr, mp_sz, mp, ++strt)) == -1)
+		{
+			free(mp_tmp);
 			return (-1);
+		}
 		i = -1;
 		while (++i < 4)
 			mp[strt + ttr->x[i]] = ttr->c;

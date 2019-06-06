@@ -6,9 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/Users/mcomet/Desktop/fillit/libft/ft_strnew.c
-libft.h
+/Users/mcomet/Desktop/fillit/includes/header.h
+../libft/libft.h
 /Users/mcomet/Desktop/fillit/libft/libft.h
+unistd.h
+-
+stdlib.h
+-
+fcntl.h
+-
+stdio.h
+-
+errno.h
+-
 
 /Users/mcomet/Desktop/fillit/libft/libft.h
 unistd.h
@@ -17,4 +27,8 @@ string.h
 -
 stdlib.h
 -
+
+/Users/mcomet/Desktop/fillit/sources/main.c
+../includes/header.h
+/Users/mcomet/Desktop/fillit/includes/header.h
 

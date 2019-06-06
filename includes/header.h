@@ -43,5 +43,6 @@ void				ft_print_map(char *mp, int mp_sz);
 char				*ft_create_map(int mp_sz);
 void				opencheckstock(char *argv, char *stock, int *nm_ttr);
 void				freelist(t_tetri *head);
+int					check_exclusion(char *s, int i);
 
 #endif

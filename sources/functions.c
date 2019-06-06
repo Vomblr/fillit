@@ -121,7 +121,7 @@ int			ft_decode_tetri(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
 
 	if (mp_sz_prvs == mp_sz_crrnt)
 		return (1);
-	if (mp_sz_crrnt > mp_sz_prvs)
+	if (mp_sz_crrnt < mp_sz_prvs)
 		if (tetrimino->x[3] % mp_sz_prvs / mp_sz_crrnt > 0 ||
 			tetrimino->x[2] % mp_sz_prvs / mp_sz_crrnt > 0)
 			return (0);

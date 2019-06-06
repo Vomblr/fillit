@@ -44,7 +44,8 @@ void	fillit(t_tetri *ttr, int nm_ttr)
 	while (mp_sz * mp_sz < nm_ttr * 4)
 		mp_sz++;
 	while (ft_decode_tetri(ttr, mp_sz_prvs, mp_sz) == 0)
-		mp_sz_prvs = mp_sz++;
+		if (mp_sz_prvs < mp_sz++)
+			mp_sz_prvs = mp_sz;
 	if (!(mp = ft_create_map(mp_sz)))
 		return ;
 	while (ft_rcrsn(ttr, mp_sz, mp) != 1)
@@ -62,34 +63,31 @@ void	fillit(t_tetri *ttr, int nm_ttr)
 
 int		ft_rcrsn(t_tetri *ttr, int mp_sz, char *mp)
 {
-	int			a;
-	int			i;
-	int			strt;
-	char		*mp_tmp;
+	t_magic		m;
 
-	i = -1;
+	m.i = -1;
 	if (!(ttr->c))
 		return (1);
-	if ((strt = ft_tr_ttr(ttr, mp_sz, mp, 0)) == -1)
+	if ((m.strt = ft_tr_ttr(ttr, mp_sz, mp, 0)) == -1)
 		return (-1);
-	if ((!(mp_tmp = ft_strnew(mp_sz * mp_sz))) || !ft_strcpy(mp_tmp, mp))
+	if ((!(m.mp_tmp = ft_strnew(mp_sz * mp_sz))) || !ft_strcpy(m.mp_tmp, mp))
 		return (-1);
-	while (++i < 4)
-		mp[strt + ttr->x[i]] = ttr->c;
-	while ((a = ft_rcrsn(ttr->next, mp_sz, mp)) != 1 && strt != -1)
+	while (++m.i < 4)
+		mp[m.strt + ttr->x[m.i]] = ttr->c;
+	while ((m.a = ft_rcrsn(ttr->next, mp_sz, mp)) != 1 && m.strt != -1)
 	{
-		ft_strcpy(mp, mp_tmp);
-		if ((strt = ft_tr_ttr(ttr, mp_sz, mp, ++strt)) == -1)
+		ft_strcpy(mp, m.mp_tmp);
+		if ((m.strt = ft_tr_ttr(ttr, mp_sz, mp, ++m.strt)) == -1)
 		{
-			free(mp_tmp);
+			free(m.mp_tmp);
 			return (-1);
 		}
-		i = -1;
-		while (++i < 4)
-			mp[strt + ttr->x[i]] = ttr->c;
+		m.i = -1;
+		while (++m.i < 4)
+			mp[m.strt + ttr->x[m.i]] = ttr->c;
 	}
-	free(mp_tmp);
-	return ((a != 1 && strt == -1) ? -1 : 1);
+	free(m.mp_tmp);
+	return ((m.a != 1 && m.strt == -1) ? -1 : 1);
 }
 
 int		ft_tr_ttr(t_tetri *ttr, int mp_sz, char *mp, int strt)

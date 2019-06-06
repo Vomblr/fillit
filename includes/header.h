@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 15:23:19 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/05 18:11:47 by klekisha         ###   ########.fr       */
+/*   Created: 2019/06/06 21:41:59 by mcomet            #+#    #+#             */
+/*   Updated: 2019/06/06 21:45:18 by mcomet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
+
 # define HEADER_H
 # include "../libft/libft.h"
 # include <unistd.h>
@@ -18,6 +19,14 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <errno.h>
+
+typedef struct		s_magic
+{
+	int			a;
+	int			i;
+	int			strt;
+	char		*mp_tmp;
+}					t_magic;
 
 typedef struct		s_tetri
 {

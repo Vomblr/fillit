@@ -75,13 +75,13 @@ void		set_tetri(t_tetri **tmp, char *s)
 	{
 		if (s[i] == '#')
 		{
-			if ((s[i + 1] == '#' && s[i + 4] == '#' && s[i + 5] == '#') ||
+			if ((i <= 11) && ((s[i + 1] == '#' && s[i + 4] == '#' && s[i + 5] == '#') ||
 					(s[i + 4] == '#' && s[i + 5] == '#' && s[i + 6] == '#') ||
 					(s[i + 5] == '#' && s[i + 9] == '#' && s[i + 10] == '#') ||
 					(s[i + 4] == '#' && s[i + 5] == '#' && s[i + 10] == '#') ||
-					(s[i + 4] == '#' && s[i + 5] == '#' && s[i + 9] == '#'))
+					(s[i + 4] == '#' && s[i + 5] == '#' && s[i + 9] == '#')))
 				z = 1;
-			else if (s[i + 3] == '#' && s[i + 4] == '#' && s[i + 5] == '#')
+			else if ((i <= 16) && (s[i + 3] == '#' && s[i + 4] == '#' && s[i + 5] == '#'))
 				z = 2;
 			(*tmp)->x[++j] = z;
 			z++;
@@ -89,26 +89,27 @@ void		set_tetri(t_tetri **tmp, char *s)
 		if (z && s[i] != '#' && s[i] != '\n')
 			z++;
 	}
-	//free(s);
 }
 
 t_tetri		*stock_tetri(char *str, int num_tetraminos)
 {
 	int			plus21;
 	char		c;
+	char		*s;
 	t_tetri		*tmp;
 	t_tetri		*stock;
 
 	plus21 = 0;
 	c = 'A';
-	if (!(stock = (t_tetri*)malloc(sizeof(t_tetri))))
+	if (!(stock = (t_tetri*)ft_memalloc(sizeof(t_tetri))))
 		return (NULL);
 	tmp = stock;
 	while (num_tetraminos > 0)
 	{
 		tmp->c = c;
-		set_tetri(&tmp, ft_strsub(str, 0 + plus21, 20));
-		if (!(tmp->next = (t_tetri*)malloc(sizeof(t_tetri))))
+		set_tetri(&tmp, s = ft_strsub(str, 0 + plus21, 20));
+		free(s);
+		if (!(tmp->next = (t_tetri*)ft_memalloc(sizeof(t_tetri))))
 			return (NULL);
 		tmp = tmp->next;
 		num_tetraminos--;

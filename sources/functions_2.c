@@ -41,7 +41,7 @@ char	*ft_create_map(int mp_sz)
 	return (mp);
 }
 
-void freeList(t_tetri *head)
+void	freelist(t_tetri *head)
 {
 	t_tetri	*tmp;
 

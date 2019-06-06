@@ -29,7 +29,7 @@ int		main(int argc, char **argv)
 	ttr = stock_tetri(stock, nm_ttr);
 	fillit(ttr, nm_ttr);
 	free(stock);
-	freeList(ttr);
+	freelist(ttr);
 	return (0);
 }
 
@@ -67,7 +67,6 @@ int		ft_rcrsn(t_tetri *ttr, int mp_sz, char *mp)
 	int			strt;
 	char		*mp_tmp;
 
-	a = -1;
 	i = -1;
 	if (!(ttr->c))
 		return (1);
@@ -86,6 +85,7 @@ int		ft_rcrsn(t_tetri *ttr, int mp_sz, char *mp)
 		while (++i < 4)
 			mp[strt + ttr->x[i]] = ttr->c;
 	}
+	free(mp_tmp);
 	return ((a != 1 && strt == -1) ? -1 : 1);
 }
 

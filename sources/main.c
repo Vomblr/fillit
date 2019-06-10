@@ -47,7 +47,7 @@ void	fillit(t_tetri *ttr, int nm_ttr)
 		if (mp_sz_prvs < mp_sz++)
 			mp_sz_prvs = mp_sz;
 	if (!(mp = ft_create_map(mp_sz)))
-		return ;
+		error();
 	while (ft_rcrsn(ttr, mp_sz, mp) != 1)
 	{
 		free(mp);
@@ -55,7 +55,7 @@ void	fillit(t_tetri *ttr, int nm_ttr)
 		mp_sz++;
 		ft_decode_tetri(ttr, mp_sz_prvs, mp_sz);
 		if (!(mp = ft_create_map(mp_sz)))
-			return ;
+			error();
 	}
 	ft_print_map(mp, mp_sz);
 	free(mp);

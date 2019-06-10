@@ -55,3 +55,4 @@ CMakeLists.txt
 .vscode/
 .idea/
 .DS_Store
+tests/

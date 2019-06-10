@@ -6,12 +6,11 @@
 /*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 21:41:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/06 21:45:18 by mcomet           ###   ########.fr       */
+/*   Updated: 2019/06/10 19:17:48 by mcomet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
-
 # define HEADER_H
 # include "../libft/libft.h"
 # include <unistd.h>
@@ -27,14 +26,12 @@ typedef struct		s_magic
 	int			strt;
 	char		*mp_tmp;
 }					t_magic;
-
 typedef struct		s_tetri
 {
 	char			c;
 	int				x[4];
 	struct s_tetri	*next;
 }					t_tetri;
-
 void				usage(void);
 void				error(void);
 int					check_count_pcs_newstr(int fd, char *line);
@@ -53,5 +50,4 @@ char				*ft_create_map(int mp_sz);
 void				opencheckstock(char *argv, char *stock, int *nm_ttr);
 void				freelist(t_tetri *head);
 int					check_exclusion(char *s, int i);
-
 #endif

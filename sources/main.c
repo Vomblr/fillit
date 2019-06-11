@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/08 19:04:24 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/11 23:31:27 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,13 @@ int		ft_tr_ttr(t_tetri *ttr, int mp_sz, char *mp, int strt)
 		i = -1;
 		while (++i < 4 && (t = ttr->x[i]) != -1)
 		{
-			if ((mp_sz == 3 && ((t == i) || (t == i + 2))) &&
+			if (mp_sz == 3 && i < 3 && t == 2 && ttr->x[i + 1] == 3 &&
 			(mp[strt + t] != '.' || (strt != 0 && strt != 3)))
 				flg_sccss--;
 			if ((mp[strt + t] != '.') || (mp_sz <= 3 && i > 0 &&
-				(t - ttr->x[i - 1] == 1) && ((strt + t) % mp_sz == 0) &&
-				(t != i) && (t != i + 2)) || (mp_sz > 3 && i > 0 &&
+				i + 1 != mp_sz && (t - ttr->x[i - 1] == 1) &&
+				((strt + t) % mp_sz == 0) && (t != i) &&
+				(t != i + 2)) || (mp_sz > 3 && i > 0 &&
 				(t - ttr->x[i - 1] == 1) && ((strt + t) % mp_sz == 0)))
 				flg_sccss--;
 		}

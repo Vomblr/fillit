@@ -1,0 +1,60 @@
+.**
+**.
+...
+
+-------------------------------------
+[KO]    (0m0.004s)      only_one2
+your output:
+.AA.
+AA..
+....
+....
+expected output:
+.AA
+AA.
+...
+--------------------------------------
+your output:
+AABB
+A.BB
+A...
+....
+expected output:
+AA.
+ABB
+ABB
+[KO]    (0m0.004s)      very_simple2
+--------------------------------------
+your output:
+AABB
+AAB.
+..B.
+....
+expected output:
+BB.
+BAA
+BAA
+[KO]    (0m0.004s)      very_simple3
+--------------------------------------
+your output:
+AAA.
+ABB.
+.BB.
+....
+expected output:
+AAA
+ABB
+.BB
+[KO]    (0m0.005s)      very_simple4
+--------------------------------------
+your output:
+ABBB
+AB..
+A...
+A...
+expected output:
+ABBBB
+A....
+A....
+A....
+.....

@@ -43,8 +43,8 @@ void				set_tetri(t_tetri **tmp, char *str);
 t_tetri				*stock_tetri(char *str, int num_tetraminos);
 int					ft_decode_tetri(t_tetri *tetrimino, int map_size_prev,
 					int map_size_current);
-int					ft_rcrsn(t_tetri *tetri, int map_size, char *map);
-int					ft_tr_ttr(t_tetri *ttr, int mp_sz, char *mp, int strt_pnt);
+int					ft_rcrsn(t_tetri *tetri, int map_size, char *map, int nm_ttr);
+int					ft_tr_ttr(t_tetri *ttr, int mp_sz, char *mp, int strt_pnt, int nm_ttr);
 void				ft_print_map(char *mp, int mp_sz);
 char				*ft_create_map(int mp_sz);
 void				opencheckstock(char *argv, char *stock, int *nm_ttr);

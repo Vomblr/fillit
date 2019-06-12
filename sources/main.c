@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/11 23:31:27 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/12 20:39:49 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,28 @@ int		main(int argc, char **argv)
 	freelist(ttr);
 	return (0);
 }
+
+// int		main(int argc, char **argv)
+// {
+// 	t_tetri		*ttr;
+// 	char		*stock;
+// 	int			nm_ttr;
+
+// 	// char		*arg = "test1";
+// 	// char		*arg = "test2";
+// 	// char		*arg = "test3";
+// 	// char		*arg = "test4";
+// 	char		*arg = "test5";
+
+// 	if (!(stock = (char *)malloc(sizeof(char) * 650)))
+// 		error();
+// 	opencheckstock(arg, stock, &nm_ttr);
+// 	ttr = stock_tetri(stock, nm_ttr);
+// 	fillit(ttr, nm_ttr);
+// 	free(stock);
+// 	freelist(ttr);
+// 	return (0);
+// }
 
 void	fillit(t_tetri *ttr, int nm_ttr)
 {
@@ -106,9 +128,8 @@ int		ft_tr_ttr(t_tetri *ttr, int mp_sz, char *mp, int strt)
 			(mp[strt + t] != '.' || (strt != 0 && strt != 3)))
 				flg_sccss--;
 			if ((mp[strt + t] != '.') || (mp_sz <= 3 && i > 0 &&
-				i + 1 != mp_sz && (t - ttr->x[i - 1] == 1) &&
-				((strt + t) % mp_sz == 0) && (t != i) &&
-				(t != i + 2)) || (mp_sz > 3 && i > 0 &&
+				(t - ttr->x[i - 1] == 1) &&
+				((strt + t) % mp_sz == 0)) || (mp_sz > 3 && i > 0 &&
 				(t - ttr->x[i - 1] == 1) && ((strt + t) % mp_sz == 0)))
 				flg_sccss--;
 		}
@@ -118,3 +139,6 @@ int		ft_tr_ttr(t_tetri *ttr, int mp_sz, char *mp, int strt)
 	}
 	return (-1);
 }
+
+// i + 1 != mp_sz && 
+//  && (t != i) && (t != i + 2)

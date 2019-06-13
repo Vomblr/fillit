@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/12 20:39:49 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/13 20:28:54 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int		main(int argc, char **argv)
 // 	char		*stock;
 // 	int			nm_ttr;
 
-// 	// char		*arg = "test1";
+// 	char		*arg = "test1";
 // 	// char		*arg = "test2";
 // 	// char		*arg = "test3";
 // 	// char		*arg = "test4";
-// 	char		*arg = "test5";
+// 	// char		*arg = "test5";
 
 // 	if (!(stock = (char *)malloc(sizeof(char) * 650)))
 // 		error();

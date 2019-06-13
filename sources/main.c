@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/13 20:28:54 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/13 20:52:45 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int		ft_tr_ttr(t_tetri *ttr, int mp_sz, char *mp, int strt, int nm_ttr)
 			(mp[strt + t] != '.' || (strt != 0 && strt != 3))) ||
 			(nm_ttr == 1 && i + 1 != mp_sz && i > 0 && (t - ttr->x[i - 1] == 1) && ((strt + t) % mp_sz == 0) && (t != i) && (t != i + 2))
 			|| (nm_ttr == 2 && i > 0 && (t - ttr->x[i - 1] == 1) && ((strt + t) % mp_sz == 0) && (t != i) && (t != i + 2))))
-			flg_sccss--;
+				flg_sccss--;
 			if ((mp[strt + t] != '.') || (mp_sz == 2 && i + 1 != mp_sz && i > 0 &&
 				(t - ttr->x[i - 1] == 1) &&
 				((strt + t) % mp_sz == 0) && (t != i) && (t != i + 2))

@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 20:33:39 by klekisha          #+#    #+#             */
-/*   Updated: 2019/06/11 23:25:35 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/13 20:49:12 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,15 +118,24 @@ int			ft_decode_tetri(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
 {
 	int		indx;
 	int		tmp;
+	t_tetri *fx_ttr;
 
+	fx_ttr = tetrimino;
 	if (mp_sz_prvs == mp_sz_crrnt)
 		return (1);
 	if (mp_sz_crrnt < mp_sz_prvs)
-		if (tetrimino->x[3] % mp_sz_prvs / mp_sz_crrnt > 0 ||
-			tetrimino->x[3] / mp_sz_prvs / mp_sz_crrnt > 0 ||
-			tetrimino->x[2] % mp_sz_prvs / mp_sz_crrnt > 0 ||
-			tetrimino->x[1] % mp_sz_prvs / mp_sz_crrnt > 0)
-			return (0);
+	{
+		while (tetrimino->c)
+		{
+			if (tetrimino->x[3] % mp_sz_prvs / mp_sz_crrnt > 0 ||
+				tetrimino->x[3] / mp_sz_prvs / mp_sz_crrnt > 0 ||
+				tetrimino->x[2] % mp_sz_prvs / mp_sz_crrnt > 0 ||
+				tetrimino->x[1] % mp_sz_prvs / mp_sz_crrnt > 0)
+				return (0);
+			tetrimino = tetrimino->next;
+		}
+	}
+	tetrimino = fx_ttr;
 	while (tetrimino->c)
 	{
 		indx = -1;

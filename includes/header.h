@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
+/*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 21:41:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/10 19:17:48 by mcomet           ###   ########.fr       */
+/*   Updated: 2019/06/14 21:44:29 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,6 @@ char				*ft_create_map(int mp_sz);
 void				opencheckstock(char *argv, char *stock, int *nm_ttr);
 void				freelist(t_tetri *head);
 int					check_exclusion(char *s, int i);
+int					ft_check_map_3(t_tetri *ttr, char *mp, int strt, 
+					int nm_ttr, int i);
 #endif

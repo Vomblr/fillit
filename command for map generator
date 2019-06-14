@@ -1,0 +1,1 @@
+clang++ -O2 -std=c++14 *.cpp&& ./a.out 2 1000 ./fillit ./fillitet

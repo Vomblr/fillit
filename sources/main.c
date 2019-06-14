@@ -6,7 +6,7 @@
 /*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 15:48:59 by mcomet            #+#    #+#             */
-/*   Updated: 2019/06/13 20:52:45 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/14 22:44:21 by klekisha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		main(int argc, char **argv)
 	if (!(stock = (char *)malloc(sizeof(char) * 650)))
 		error();
 	opencheckstock(argv[1], stock, &nm_ttr);
-
+ 
 	ttr = stock_tetri(stock, nm_ttr);
 	fillit(ttr, nm_ttr);
 	free(stock);
@@ -125,11 +125,9 @@ int		ft_tr_ttr(t_tetri *ttr, int mp_sz, char *mp, int strt, int nm_ttr)
 		i = -1;
 		while (++i < 4 && (t = ttr->x[i]) != -1)
 		{
-			if (mp_sz == 3 && ((i < 3 && t == 2 && ttr->x[i + 1] == 3 &&
-			(mp[strt + t] != '.' || (strt != 0 && strt != 3))) ||
-			(nm_ttr == 1 && i + 1 != mp_sz && i > 0 && (t - ttr->x[i - 1] == 1) && ((strt + t) % mp_sz == 0) && (t != i) && (t != i + 2))
-			|| (nm_ttr == 2 && i > 0 && (t - ttr->x[i - 1] == 1) && ((strt + t) % mp_sz == 0) && (t != i) && (t != i + 2))))
-				flg_sccss--;
+			if (mp_sz == 3)
+				if (ft_check_map_3(ttr, mp, strt, nm_ttr, i) == - 1)
+					flg_sccss--;
 			if ((mp[strt + t] != '.') || (mp_sz == 2 && i + 1 != mp_sz && i > 0 &&
 				(t - ttr->x[i - 1] == 1) &&
 				((strt + t) % mp_sz == 0) && (t != i) && (t != i + 2))
@@ -144,4 +142,26 @@ int		ft_tr_ttr(t_tetri *ttr, int mp_sz, char *mp, int strt, int nm_ttr)
 	return (-1);
 }
 
-//&& i + 1 != mp_sz
+int		ft_check_map_3(t_tetri *ttr, char *mp, int strt, int nm_ttr, int i)
+{
+	int	t;
+	if (mp[strt + ttr->x[i]] != '.')
+		return (-1);
+	if (strt != 0 && strt != 3 && ((
+		(i < 3 && ttr->x[i] == 2 && ttr->x[i + 1] == 3)
+	|| (i < 2 && ((t = ttr->x[i] / 3) != -1) && ttr->x[i + 1] / 3 == t && ttr->x[i + 2] / 3 == t)
+	|| (ttr->x[0] == 0 && ttr->x[1] == 1 && ttr->x[2] == 4 && ttr->x[3] == 5)
+	)))
+		return (-1);
+	if (nm_ttr != -1)
+		if (i + 1 != 3 && i > 0 && (ttr->x[i] - ttr->x[i - 1] == 1) &&
+		// if (i > 0 && (ttr->x[i] - ttr->x[i - 1] == 1) &&
+		// ((strt + ttr->x[i]) % 3 == 0))
+		((strt + ttr->x[i]) % 3 == 0) && (ttr->x[i] != i) && (ttr->x[i] != i + 2))
+			return (-1);
+	if (strt >= 2 && ttr->x[3] / 3 == 2)
+		return (-1);
+	return (1);
+}
+
+// (i > 0 && (t - ttr->x[i - 1] == 1) && ((strt + t) % mp_sz == 0) && (t != i) && (t != i + 2))

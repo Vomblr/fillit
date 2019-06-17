@@ -6,7 +6,7 @@
 /*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 18:05:35 by klekisha          #+#    #+#             */
-/*   Updated: 2019/06/10 21:27:35 by mcomet           ###   ########.fr       */
+/*   Updated: 2019/06/17 15:32:15 by mcomet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,15 @@ int		check_exclusion(char *s, int i)
 		return (2);
 	else
 		return (0);
+}
+
+int		some_check(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
+{
+	if (tetrimino->x[3] % mp_sz_prvs / mp_sz_crrnt > 0 ||
+		tetrimino->x[3] / mp_sz_prvs / mp_sz_crrnt > 0 ||
+		tetrimino->x[2] % mp_sz_prvs / mp_sz_crrnt > 0 ||
+		tetrimino->x[1] % mp_sz_prvs / mp_sz_crrnt > 0)
+		return (0);
+	else
+		return (1);
 }

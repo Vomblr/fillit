@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   functions.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: klekisha <klekisha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcomet <mcomet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 20:33:39 by klekisha          #+#    #+#             */
-/*   Updated: 2019/06/13 20:49:12 by klekisha         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:29:08 by mcomet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ t_tetri		*stock_tetri(char *str, int num_tetraminos)
 int			ft_decode_tetri(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
 {
 	int		indx;
-	int		tmp;
 	t_tetri *fx_ttr;
 
 	fx_ttr = tetrimino;
@@ -127,10 +126,7 @@ int			ft_decode_tetri(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
 	{
 		while (tetrimino->c)
 		{
-			if (tetrimino->x[3] % mp_sz_prvs / mp_sz_crrnt > 0 ||
-				tetrimino->x[3] / mp_sz_prvs / mp_sz_crrnt > 0 ||
-				tetrimino->x[2] % mp_sz_prvs / mp_sz_crrnt > 0 ||
-				tetrimino->x[1] % mp_sz_prvs / mp_sz_crrnt > 0)
+			if (!(some_check(tetrimino, mp_sz_prvs, mp_sz_crrnt)))
 				return (0);
 			tetrimino = tetrimino->next;
 		}
@@ -140,11 +136,7 @@ int			ft_decode_tetri(t_tetri *tetrimino, int mp_sz_prvs, int mp_sz_crrnt)
 	{
 		indx = -1;
 		while (++indx < 4)
-		{
-			tmp = tetrimino->x[indx];
-			tetrimino->x[indx] = tmp / mp_sz_prvs * mp_sz_crrnt +
-					tmp % mp_sz_prvs;
-		}
+			deccycle(tetrimino, indx, mp_sz_prvs, mp_sz_crrnt);
 		tetrimino = tetrimino->next;
 	}
 	return (1);
